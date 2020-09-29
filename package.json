@@ -1,0 +1,24 @@
+{
+  "name": "kydi19-lab6",
+  "version": "1.0.0",
+  "description": "lab 6",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/XYIAN/kydi19-lab6.git"
+  },
+  "author": "Kyle Dilbeck",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/XYIAN/kydi19-lab6/issues"
+  },
+  "homepage": "https://github.com/XYIAN/kydi19-lab6#readme",
+  "dependencies": {
+    "ejs": "^2.7.2",
+    "express": "^4.17.1",
+    "request": "^2.88.0"
+  }
+}
