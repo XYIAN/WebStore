@@ -9,31 +9,7 @@ app.get("/", function(req,res)//root route
    //res.send("it works!"); 
    
 });
-app.get("/experience", function(req,res)// route 1
-{
-   res.render("experience.ejs"); 
-});
 
-
-app.get("/education", function(req,res)//route 2
-{
-   res.render("education.ejs"); 
-});
-
-app.get("/resume", function(req,res)//route 3
-{
-   res.render("resume.ejs"); 
-});
-
-app.get("/contact", function(req,res)//route 4
-{
-   res.render("contact.ejs"); 
-});
-
-app.get("/me", function(req,res)//route 5
-{
-   res.render("me.ejs"); 
-});
 
 
 //server listener - run server w/ port number
