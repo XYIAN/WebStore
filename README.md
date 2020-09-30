@@ -1,3 +1,9 @@
 # WebStore
 project 2 CST438 
-this is a backup repo incase the team decides to move from andriod app to html/web app 
+This is a mock bookstore webapp
+Utility: 
+-login
+-save items 
+-create items?
+-purchase items 
+-views
