@@ -1,0 +1,135 @@
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+-- --------------------------------------------------------
+-- Table structure for table `user_info`
+DROP TABLE IF EXISTS `user_info`;
+CREATE TABLE `user_info` (
+  `userId` mediumint(9) NOT NULL,
+  `userName` varchar(25) COLLATE utf8_unicode_ci NOT NULL,
+  `password` varchar(72) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+
+INSERT INTO `user_info` (`userId`, `userName`, `password`) VALUES
+(1, 'admin', '$2b$10$w8ZRlYCzT0j74bWWZ9sBr.ZZm3q1pItcJEij6K3qdgm4TZCljUXFq'),
+(2, 'usr', '$2b$10$dqzhJGwikcv5VvUzNmKiw.DG.y4te173IEFinULXy5p.odDumRTIe'),
+(3, 'abc', '$2b$10$Orb9/J//8bqGRY10OoopBet96aNwA.hAiYFgDat/VpRK7VPB7kN5S');
+--
+-- passwords (unencrypted)
+-- 1 admin
+-- 2 pwd
+-- 3 123
+-- --------------------------------------------------------
+
+-- Table structure for table `book_info`
+DROP TABLE IF EXISTS `book_info`;
+CREATE TABLE `book_info` (
+  `bookId` mediumint(9) NOT NULL,
+  `title` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `author` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `cover` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  `year` int(4) DEFAULT NULL,
+  `inStock` int(3) DEFAULT NULL,
+  `price` float(5,2) DEFAULT NULL,
+  `genre` varchar(10) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+INSERT INTO `book_info` (`bookId`, `title`, `author`, `cover`, `year`, `inStock`, `price`, `genre`) VALUES
+(1, 'A Tale of Two Cities', 'Charles Dickens', 
+'https://imgix.ranker.com/user_node_img/27/526685/original/a-tale-of-two-cities-books-photo-u2?w=125&h=125&fit=crop&crop=faces&q=60&fm=pjpg', 
+1859, 12, 10.99, 'novel'),
+(2, 'The Lord of the Rings', 'J.R.R. Tolkien', 
+'https://imgix.ranker.com/user_node_img/111/2204773/original/the-lord-of-the-rings-books-photo-u2?w=125&h=125&fit=crop&crop=faces&q=60&fm=pjpg', 
+1954, 20, 12.99, 'fantasy'),
+(3, 'Harry Potter and the Philosophers Stone', 'J.K. Rolling', 
+'https://imgix.ranker.com/user_node_img/124/2474553/original/harry-potter-and-the-philosopher-s-stone-books-photo-u1?w=125&h=125&fit=crop&crop=faces&q=60&fm=pjpg', 
+1997, 10, 6.99, 'fantasy'),
+(4, 'The Hobbit', 'J.R.R. Tolkien', 
+'https://imgix.ranker.com/user_node_img/110/2198358/original/the-hobbit-books-photo-u5?w=125&h=125&fit=crop&crop=faces&q=60&fm=pjpg', 
+1937, 5, 2.99, 'fantasy'),
+(5, 'Alices Adventures in Wonderland', 'Lewis Carroll', 
+'https://imgix.ranker.com/user_node_img/980/19593805/original/alice-in-wonderland-photo-u7?w=120&h=120&q=60&fm=pjpg&fit=crop&crop=faces', 
+1865, 9, 4.99, 'kids'),
+(6, 'The Little Prince', 'Antoine de Saint-Exupéry', 
+'https://imgix.ranker.com/user_node_img/111/2204218/original/the-little-prince-books-photo-u2?w=125&h=125&fit=crop&crop=faces&q=60&fm=pjpg', 
+1943, 13, 3.99, 'kids'),
+(7, 'Dream of the Red Chamber', 'Cao Xueqin', 
+'https://imgix.ranker.com/node_img/45/888783/original/dream-of-the-red-chamber-books-photo-1?w=125&h=125&fit=crop&crop=faces&q=60&fm=pjpg', 
+1791, 5, 5.99, 'novel'),
+(8, 'And Then There Were None', 'Agatha Christie', 
+'https://imgix.ranker.com/user_node_img/3098/61943140/original/61943140-photo-u1?w=120&h=120&q=60&fm=pjpg&fit=crop&crop=faces', 
+1939, 3, 1.99, 'mystery'),
+(9, 'The Lion, the Witch and the Wardrobe', 'C. S. Lewis', 
+'https://imgix.ranker.com/user_node_img/111/2204085/original/the-lion-the-witch-and-the-wardrobe-books-photo-u1?w=120&h=120&q=60&fm=pjpg&fit=crop&crop=faces', 
+1950, 25, 6.99 , 'fantasy'),
+(10, 'The Da Vinci Code', 'Dan Brown', 
+'https://imgix.ranker.com/user_node_img/110/2186945/original/the-da-vinci-code-books-photo-u2?w=120&h=120&q=60&fm=pjpg&fit=crop&crop=faces', 
+2003, 2, 8.99, 'mystery'),
+(11, '1984', 'George Orwell',
+'https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1532714506l/40961427._SX318_.jpg', 
+1949, 1, 23.99, 'dystopian'),
+(12, 'Norse Mythology', 'Neil Gaiman',
+'https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1516128292l/37903770._SX318_.jpg', 
+2017, 3, 12.99, 'mythological'),
+(13, 'Along Came a Spider', 'James Patterson',
+'https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1388272560l/13145.jpg', 
+1993, 7, 6.99, 'mystery'),
+(14, 'To Kill a Mockingbird', 'Harper Lee',
+'https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1553383690l/2657.jpg', 
+1960, 10, 13.99, 'novel'),
+(15, 'Fahrenheit 451', 'Ray Bradbury',
+'https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1383718290l/13079982.jpg', 
+1954, 3, 9.99, 'dystopian'),
+(16, 'The Metamorphosis', 'Franz Kafka',
+'https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1359061917l/485894.jpg', 
+1912, 1, 3.99, 'mystery'),
+(17, 'Stuart Little', 'E.B. White',
+'https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1429969863l/24916068.jpg', 
+1945, 20, 1.99, 'kids'),
+(18, 'Romeo and Juliet', 'William Shakespeare',
+'https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1572098085l/18135._SY475_.jpg', 
+1595, 5, 11.99, 'novel'),
+(19, 'The Hunger Games', 'Suzanne Collins',
+'https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1586722975l/2767052.jpg', 
+2008, 11, 11.99, 'teen'),
+(20, 'The Fault in Our Stars', 'John Green',
+'https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1360206420l/11870085.jpg', 
+2012, 1, 7.99, 'teen');
+
+-- --------------------------------------------------------
+-- Table structure for table `order_info`
+DROP TABLE IF EXISTS `order_info`;
+CREATE TABLE `order_info` (
+  `order_id` mediumint(9) NOT NULL,
+  `userId` mediumint(9) NOT NULL,
+  `bookId`  mediumint(9) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+-- Indexes for table `user_info`
+ALTER TABLE `user_info`
+  ADD PRIMARY KEY (`userId`);
+
+-- Indexes for table `book_info`
+ALTER TABLE `book_info`
+  ADD PRIMARY KEY (`bookId`);
+  
+-- Indexes for table `order_info`
+ALTER TABLE `order_info`
+  ADD PRIMARY KEY (`order_id`);
+
+---- --------------------------------------------------------
+-- AUTO_INCREMENT 
+ALTER TABLE `user_info`
+  MODIFY `userId` mediumint(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  
+ALTER TABLE `book_info`
+  MODIFY `bookId` mediumint(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  
+ALTER TABLE `order_info`
+  MODIFY `order_id` mediumint(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+
+COMMIT;

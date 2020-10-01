@@ -1,5 +1,6 @@
 const express = require('express'); 
-const app = express(); 
+const app = express();
+const mysql = require('mysql');
 app.engine('html', require('ejs').renderFile);//render other files
 app.use(express.static("public"));//access img css js or any external file
 //routes ---can also be POST method vs get
