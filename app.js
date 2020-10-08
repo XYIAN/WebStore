@@ -1,8 +1,10 @@
 const express = require('express'); 
 const app = express();
 const mysql = require('mysql');
+// const path = require('path')
 app.engine('html', require('ejs').renderFile);//render other files
 app.use(express.static("public"));//access img css js or any external file
+
 //routes ---can also be POST method vs get
 app.get("/", function(req,res)//root route
 {
@@ -11,11 +13,15 @@ app.get("/", function(req,res)//root route
 });
 
 app.get("/login", function(req, res){ // login route
-    res.render("views/login.ejs");
+    res.render("login.ejs");
 });
 
 app.get("/signUp", function(req, res){ // sign up route
     res.render("signUp.ejs");
+});
+
+app.get("/main", function(req, res){ // main route
+    res.render("mainPage.ejs");
 });
 
 

@@ -22,13 +22,15 @@
         <!--<h5 class="centerText"> Navigation Tabs :: Click on a tab to learn more</h5>-->
         
         <div class="nav" background="img/img.png" width="400">
-            <a href="/"> HOME </a>
-            <a href="/"> ABOUT </a>
-            <a href="/"> CONTACT </a>
+            <a class="leftA" href="/"> HOME </a>
+            <a class="leftA" href="/"> ABOUT </a>
+            
+            <!--using contact temporarily as main page-->
+            <a class="leftA" href="/main"> CONTACT </a>
             <input type="text" placeholder="Search by Title, Author, or ISBN...">
-            <button id="submitButton" type="submit">Enter</button>
-            <button onclick="location.href='login.ejs';">Log In!</button>
-            <button onclick="location.href='signUp.ejs';">Sign Up!</button>
+            <button type="submit">Enter</button>
+            <a class="rightA" href="/login"><button>Log In!</button></a>
+            <a class="rightA" href="/signUp"><button>Sign Up!</button></a>
         </div>
         
         <marquee><h4 id="bottomInfo">Welcome to our book store, Please click on any of the links above to learn more! Created 9/29/20 __________________ Thank you for visiting! ___________________Buy Something!______  </h4></marquee>

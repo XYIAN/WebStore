@@ -41,18 +41,18 @@ h4{
 /*align elements*/
 
 /*CSS for Navigation Bar*/
-.nav a
+.leftA
 {
 	text-align: center;
 	padding: 14px 16px;
 	text-decoration: none;
-    font-size: 1.8em; 
+    font-size: 1.7em; 
     text-decoration: none;
     color: white; 
 }
-.nav a:hover
+.leftA:hover
 {
-    font-size: 2.5em;
+    font-size: 2em;
     color: white;
     text-shadow: 2px 2px 8px cyan;
     transition: 2s;
@@ -72,7 +72,7 @@ h4{
 /*CSS for buttons*/
 button{
 	display: inline-block;
-	padding: 5px;
+	/*padding: 5px;*/
 	border:0.1em solid white;
 	margin: 15px 23px 15px 0px;
 	width: 90px;
@@ -89,6 +89,9 @@ button:hover{
 	text-shadow: 2px 2px 8px #80FFFF;
 	background-color: black;
 	border:0.1em solid #80FFFF;
+}
+.nav a button{
+	margin-top: 22px;
 }
 
 table
