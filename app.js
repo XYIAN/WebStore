@@ -8,7 +8,14 @@ app.get("/", function(req,res)//root route
 {
    res.render("index.ejs");//HOME PAGE
    //res.send("it works!"); 
-   
+});
+
+app.get("/login", function(req, res){ // login route
+    res.render("views/login.ejs");
+});
+
+app.get("/signUp", function(req, res){ // sign up route
+    res.render("signUp.ejs");
 });
 
 
