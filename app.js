@@ -2,6 +2,15 @@ const express = require('express');
 const app = express();
 const mysql = require('mysql');
 // const path = require('path')
+
+const connection = mysql.createConnection({
+    host: 'localhost',
+    user: 'raul6767',
+    password: 'raulP676',
+    database: 'book_db'
+});
+connection.connect();
+
 app.engine('html', require('ejs').renderFile);//render other files
 app.use(express.static("public"));//access img css js or any external file
 
@@ -18,7 +27,28 @@ app.get("/login", function(req, res){ // login route
 
 app.get("/signUp", function(req, res){ // sign up route
     res.render("signUp.ejs");
+    
+    
 });
+/*
+app.listen("click", function(){
+    app.get("#newUserButton");
+    
+    var username = app.get("#newUsername");
+    var password = app.get("#newPassword");
+    var confirmpass = app.get("#confirmPassowrd");
+    
+    if(password != confirmpass){
+        app.get("errorMsgnew").innerHtml = `<p id = "errorMsgnew">Passwords don't match! Try again.</p>`;
+    }else{
+        var user = mysql.Server();// Need to access DB to get List of all users.
+        if(user == NULL){
+            //add user info to DB
+        }
+    }
+    
+});
+*/
 
 app.get("/main", function(req, res){ // main route
     res.render("mainPage.ejs");
