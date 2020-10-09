@@ -1,12 +1,14 @@
 const express = require('express'); 
 const app = express();
 const mysql = require('mysql');
+
 var session = require('express-session');
 var passport = require('passport');
 var bodyParser = require('body-parser');
-// const path = require('path')
+
 app.engine('html', require('ejs').renderFile);//render other files
 app.use(express.static("public"));//access img css js or any external file
+app.use(express.static('css'));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(session({
   secret: 'Secret',
@@ -25,7 +27,6 @@ const connection = mysql.createConnection({
     database: 'books_db'
 });
 connection.connect();
-
 
 //routes ---can also be POST method vs get
 app.get("/", function(req,res)//root route
@@ -70,8 +71,37 @@ app.get("/signUp", function(req, res){ // sign up route
 });
 
 app.get("/main", function(req, res){ // main route
-    res.render("mainPage.ejs");
+    // res.render("mainPage", {user: "Jen"});
+    var everything = "select * from book_info;";
+    
+    var bookInfo = [];
+    // var title = [];
+    // var author = [];
+    // var dict = {
+    //     title: ["title1", "title2"],
+    //     author: ["author1", "autor2"]
+    // }
+    var bookExists = null;
+    
+    connection.query(everything, function(error, found){
+        if (error) throw error;
+        if (found.length){
+            found.forEach(function(b){
+                bookInfo.push(b.title + "\t" + b.author);
+                // console.log(b.title + "\t" + b.author);
+            })
+            bookExists = found;
+        }
+        // res.render("mainPage.ejs", {dict: dict});
+        res.render("mainPage.ejs", {bookInfo:bookInfo})
+    });
 });
+
+// cover - image to display
+// title - book title
+// author - name of author
+// year - year published?
+// price - $ + price
 
 
 

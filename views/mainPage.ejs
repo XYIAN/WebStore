@@ -1,29 +1,15 @@
 <% include partials/head.ejs %>
         <h1 class="centerText"> Welcome to our book store! (temp main page) </h1>
         
-        <p class="centerText">This is the main page!!</strong> </p>
+        <p class="centerText">Test!!</strong> </p>
         
         <h3 class="centerText">Info:</h3>
         <p></p>
         
         <img class="centerIMG" src="/img/books.jpg" width="300" alt="Trinity Select library"/>
         
-        
-        
-           <h3> TO DO:  </h3>
-                    <ul id="fill1" style="list-style-type:circle;">
-                <h3 class"centerText"><strong>user stories</strong></h3>
-                    <li>Login</li>
-                    <li>View Products</li>
-                    <li>Save Cart</li>
-                    <li>buy</li>
-                    <li>logout</li>
-                
-                    
-                
-                <h3 class"centerText"> Completed:</h3>
-                    <li>fill1</li>
-                    <li>fill2</li>
-                    <li>fill3</li>
+        <% bookInfo.forEach(function(b) { %>
+            <%= b %>
+        <% }) %>
         
 <% include partials/footer.ejs %> 
