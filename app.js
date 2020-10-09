@@ -1,9 +1,31 @@
 const express = require('express'); 
 const app = express();
 const mysql = require('mysql');
+var session = require('express-session');
+var passport = require('passport');
+var bodyParser = require('body-parser');
 // const path = require('path')
 app.engine('html', require('ejs').renderFile);//render other files
 app.use(express.static("public"));//access img css js or any external file
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(session({
+  secret: 'Secret',
+  resave: true,
+  saveUninitialized: true
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+
+
+/* Configure MySQL DBMS */
+const connection = mysql.createConnection({
+    host: 'localhost',
+    user: 'yvcruz',
+    password: 'yvcruz',
+    database: 'books_db'
+});
+connection.connect();
+
 
 //routes ---can also be POST method vs get
 app.get("/", function(req,res)//root route
@@ -13,7 +35,34 @@ app.get("/", function(req,res)//root route
 });
 
 app.get("/login", function(req, res){ // login route
-    res.render("login.ejs");
+    res.render("login.ejs", {loginError: false});
+});
+
+app.post('/login', function(req, res){
+    var stmt = 'select * from user_info where userName=\'' 
+                +req.body.un+'\' '+
+                'and password=\''+
+                req.body.pw+'\'';
+    var user = null;
+    connection.query(stmt, function(error, results){
+        if(results.length){      //user is in db
+            user = results[0].userName;
+            req.session.login = user;
+            res.redirect('/');        
+        }else {                        //user is not in db - do this as a pop up later
+            console.log("Incorrect Login Info");
+            res.render('login.ejs', {loginError: true});
+        }
+    });
+});
+
+/* Logout Route */
+app.get('/logout', function(req, res){
+    if (req.session.login != null) {
+        var name = req.session.login;     
+        req.session.destroy();
+        res.render("logout.ejs", {logoutUser: name});
+    }else res.render("logout.ejs",{logoutUser: "ERROR NO LOG IN"})    
 });
 
 app.get("/signUp", function(req, res){ // sign up route
