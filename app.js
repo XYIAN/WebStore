@@ -1,9 +1,18 @@
 const express = require('express'); 
 const app = express();
 const mysql = require('mysql');
-// const path = require('path')
+
 app.engine('html', require('ejs').renderFile);//render other files
 app.use(express.static("public"));//access img css js or any external file
+app.use(express.static('css'));
+
+const connection = mysql.createConnection({
+    host: 'localhost',
+    user: 'jennifer',
+    password: 'jenniferL',
+    database: 'books_db'
+});
+connection.connect();
 
 //routes ---can also be POST method vs get
 app.get("/", function(req,res)//root route
@@ -21,8 +30,28 @@ app.get("/signUp", function(req, res){ // sign up route
 });
 
 app.get("/main", function(req, res){ // main route
-    res.render("mainPage.ejs");
+    // res.render("mainPage.ejs");
+    var everything = "select * from book_info;";
+    
+    var bookInfo = [];
+    var bookExists = null;
+    
+    connection.query(everything, function(error, found){
+       if (error) throw error;
+       if (found.length){
+           found.forEach(function(b){
+               
+           })
+       }
+    });
+    
 });
+
+// cover - image to display
+// title - book title
+// author - name of author
+// year - year published?
+// price - $ + price
 
 
 
