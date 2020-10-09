@@ -9,6 +9,18 @@
         <img class="centerIMG" src="/img/books.jpg" width="300" alt="Trinity Select library"/>
         
         
+        <form action="/main" method="GET">
+        	<div class='form-group row'>
+        		<label style="text-align:right;" for='name' class='col-sm-4 col-form-label'></label>
+        		<div class='col-sm-4'>
+        			<select id="name" name="name">
+        				<%bookInfo.forEach(function(title){%>
+        		            <option id="name" name ="name" value='<%=title%>'></option>
+        		        <%});%>
+        			</select>
+        		</div>
+        	</div>
+        </form>
         
 
         

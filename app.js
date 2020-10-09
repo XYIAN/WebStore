@@ -40,8 +40,9 @@ app.get("/main", function(req, res){ // main route
        if (error) throw error;
        if (found.length){
            found.forEach(function(b){
-               
+               bookInfo.push(b.title);
            })
+           bookExists = found;
        }
     });
     
