@@ -32,8 +32,8 @@ app.use(passport.session());
     connection.connect();
 // } 
 
-//routes ---can also be POST method vs get
-app.get("/", function(req,res)//root route
+// ROUTES ---can also be POST method vs get
+app.get("/", function(req,res) //root route
 {
     var stmt = "select cover, title, author, year, price from book_info;";
     
@@ -44,6 +44,14 @@ app.get("/", function(req,res)//root route
         if (found.length){ bookExists = found; }
         res.render("index.ejs", {bookInfo:bookExists})
     });
+});
+
+app.get("/contact", function(req, res){ // contact route
+    res.render("contact.ejs");
+});
+
+app.get("/about", function(req, res){ // about route
+    res.render("about.ejs");
 });
 
 app.get("/login", function(req, res){ // login route
