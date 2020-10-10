@@ -1,22 +1,13 @@
+/*background color body*/
 body { 
     background-color : white; 
     color:black; 
     font-family: 'Source Sans Pro', sans-serif;
-    /*#1FDED5 --cyan*/
-    /*margin-left: auto;*/
-    /*margin-right: auto;*/
-    /*width: 23em;*/
-    /*justify-content:center;*/
 }
-/*background color*/
+/*background color not body*/
 header, main, .nav, footer 
 {
     background-color: black; 
-    /*text-align: center; */
-    /*margin-left: auto;*/
-    /*margin-right: auto;*/
-    /*width: 8em;*/
-    /*justify-content:center;*/
 }
 .center
 {
@@ -38,7 +29,6 @@ header, main, .nav, footer
 h4{
 	color: white;
 }
-/*align elements*/
 
 /*CSS for Navigation Bar*/
 .leftA
@@ -96,31 +86,50 @@ button:hover{
 	margin: 22px 0px 15px 12px;
 }
 
-table
-{
-    margin : 0px auto;
+/*CSS for the mainPage.ejs file*/
+.grid-container {
+	/*mobile friendly, items don't overflow*/
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: center;
+	/*gaps between items*/
+	grid-gap: 15px;
+	/*padding around square surrounding items*/
+	padding: 20px;
+	/*background-color: gray;*/
 }
-td
-{
-    padding-right: 10px;
-    font-size: 1.3em;
-    color: white;
-}
-
-td strong
-{
-    color : black;
-}
-
-#table-header
-{
-    background-color: white;
+.grid-container > div {
+	background-color: rgba(255, 255, 255, 0.8);
+	text-align: center;
+	padding: 20px 10px;
 }
 
-.table-row
-{
-    background-color: black;
-}
+
+/*table*/
+/*{*/
+/*    margin : 0px auto;*/
+/*}*/
+/*td*/
+/*{*/
+/*    padding-right: 10px;*/
+/*    font-size: 1.3em;*/
+/*    color: white;*/
+/*}*/
+
+/*td strong*/
+/*{*/
+/*    color : black;*/
+/*}*/
+
+/*#table-header*/
+/*{*/
+/*    background-color: white;*/
+/*}*/
+
+/*.table-row*/
+/*{*/
+/*    background-color: black;*/
+/*}*/
 ul
 {
     width:500px;

@@ -1,29 +1,27 @@
 <% include partials/head.ejs %>
-        <h1 class="centerText"> Welcome our book store! </h1>
+        <h1 class="centerText"> Welcome to our book store!</h1>
         
-        <p class="centerText">cite is currently<strong>under construction</strong> </p>
-        
-        <h3 class="centerText">Info:</h3>
-        <p></p>
+        <!--<h3 class="centerText">Info:</h3>-->
+        <!--<p></p>-->
         
         <img class="centerIMG" src="/img/books.jpg" width="300" alt="Trinity Select library"/>
         
-        
-        
-           <h3> TO DO:  </h3>
-                    <ul id="fill1" style="list-style-type:circle;">
-                <h3 class"centerText"><strong>user stories</strong></h3>
-                    <li>Login</li>
-                    <li>View Products</li>
-                    <li>Save Cart</li>
-                    <li>buy</li>
-                    <li>logout</li>
-                
-                    
-                
-                <h3 class"centerText"> Completed:</h3>
-                    <li>fill1</li>
-                    <li>fill2</li>
-                    <li>fill3</li>
-        
+        <div class="grid-container">
+            <% bookInfo.forEach(function(b) { %>
+            
+                <!--cards displayed with bootstrap-->
+                <div class="card" style="width: 18rem;">
+                    <!--should be able to click on image or title to get details-->
+                    <img class="card-img-top" src="<%= b.cover %>" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title"><%= b.title %></h5>
+                        <!--extra: click on author to get books written by them-->
+                        <a href="#" class="card-link"><%= b.author %></a>, <%= b.year %>
+                        <p class="card-text">$<%= b.price %></p>
+                        <!--view should guide to detail Page-->
+                        <a href="#" class="btn btn-primary">View</a>
+                    </div>
+                </div>
+            <% }) %>
+        </div>
 <% include partials/footer.ejs %> 
