@@ -37,18 +37,11 @@ app.get("/", function(req,res)//root route
 {
     var stmt = "select cover, title, author, year, price from book_info;";
     
-    // var bookInfo = [];
     var bookExists = null;
     
     connection.query(stmt, function(error, found){
         if (error) throw error;
-        if (found.length){
-            // found.forEach(function(b){
-                // bookInfo.push(b.cover, b.title, b.author, b.year, b.price);
-                // console.log(b.title + "\t" + b.author);
-            // })
-            bookExists = found;
-        }
+        if (found.length){ bookExists = found; }
         res.render("index.ejs", {bookInfo:bookExists})
     });
 });
@@ -86,25 +79,6 @@ app.get('/logout', function(req, res){
 
 app.get("/signUp", function(req, res){ // sign up route
     res.render("signUp.ejs");
-});
-
-app.get("/main", function(req, res){ // main route
-    var stmt = "select cover, title, author, year, price from book_info;";
-    
-    // var bookInfo = [];
-    var bookExists = null;
-    
-    connection.query(stmt, function(error, found){
-        if (error) throw error;
-        if (found.length){
-            // found.forEach(function(b){
-                // bookInfo.push(b.cover, b.title, b.author, b.year, b.price);
-                // console.log(b.title + "\t" + b.author);
-            // })
-            bookExists = found;
-        }
-        res.render("mainPage.ejs", {bookInfo:bookExists})
-    });
 });
 
 
