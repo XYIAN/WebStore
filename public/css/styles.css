@@ -47,7 +47,6 @@ h4{
 	padding: 14px 16px;
 	text-decoration: none;
     font-size: 1.7em; 
-    text-decoration: none;
     color: white; 
 }
 .leftA:hover
@@ -74,8 +73,8 @@ button{
 	display: inline-block;
 	/*padding: 5px;*/
 	border:0.1em solid white;
-	margin: 15px 23px 15px 0px;
-	width: 90px;
+	/*margin: 15px 23px 15px 0px;*/
+	width: 80px;
 	border-radius: 0.12em;
 	box-sizing: border-box;
 	text-decoration:none;
@@ -89,6 +88,9 @@ button:hover{
 	text-shadow: 2px 2px 8px #80FFFF;
 	background-color: black;
 	border:0.1em solid #80FFFF;
+}
+.nav button{
+	margin-top: 14px;
 }
 .nav a button{
 	margin-top: 22px;

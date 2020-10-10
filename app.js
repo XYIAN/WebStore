@@ -22,8 +22,8 @@ app.use(passport.session());
 /* Configure MySQL DBMS */
 const connection = mysql.createConnection({
     host: 'localhost',
-    user: 'yvcruz',
-    password: 'yvcruz',
+    user: 'jennifer',
+    password: 'jenniferL',
     database: 'books_db'
 });
 connection.connect();
@@ -71,37 +71,23 @@ app.get("/signUp", function(req, res){ // sign up route
 });
 
 app.get("/main", function(req, res){ // main route
-    // res.render("mainPage", {user: "Jen"});
-    var everything = "select * from book_info;";
+    var stmt = "select cover, title, author, year, price from book_info;";
     
-    var bookInfo = [];
-    // var title = [];
-    // var author = [];
-    // var dict = {
-    //     title: ["title1", "title2"],
-    //     author: ["author1", "autor2"]
-    // }
+    // var bookInfo = [];
     var bookExists = null;
     
-    connection.query(everything, function(error, found){
+    connection.query(stmt, function(error, found){
         if (error) throw error;
         if (found.length){
-            found.forEach(function(b){
-                bookInfo.push(b.title + "\t" + b.author);
+            // found.forEach(function(b){
+                // bookInfo.push(b.cover, b.title, b.author, b.year, b.price);
                 // console.log(b.title + "\t" + b.author);
-            })
+            // })
             bookExists = found;
         }
-        // res.render("mainPage.ejs", {dict: dict});
-        res.render("mainPage.ejs", {bookInfo:bookInfo})
+        res.render("mainPage.ejs", {bookInfo:bookExists})
     });
 });
-
-// cover - image to display
-// title - book title
-// author - name of author
-// year - year published?
-// price - $ + price
 
 
 
