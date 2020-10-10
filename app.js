@@ -35,8 +35,22 @@ app.use(passport.session());
 //routes ---can also be POST method vs get
 app.get("/", function(req,res)//root route
 {
-   res.render("index.ejs");//HOME PAGE
-   //res.send("it works!"); 
+    var stmt = "select cover, title, author, year, price from book_info;";
+    
+    // var bookInfo = [];
+    var bookExists = null;
+    
+    connection.query(stmt, function(error, found){
+        if (error) throw error;
+        if (found.length){
+            // found.forEach(function(b){
+                // bookInfo.push(b.cover, b.title, b.author, b.year, b.price);
+                // console.log(b.title + "\t" + b.author);
+            // })
+            bookExists = found;
+        }
+        res.render("index.ejs", {bookInfo:bookExists})
+    });
 });
 
 app.get("/login", function(req, res){ // login route
