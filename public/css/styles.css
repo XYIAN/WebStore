@@ -1,22 +1,13 @@
+/*background color body*/
 body { 
     background-color : white; 
     color:black; 
     font-family: 'Source Sans Pro', sans-serif;
-    /*#1FDED5 --cyan*/
-    /*margin-left: auto;*/
-    /*margin-right: auto;*/
-    /*width: 23em;*/
-    /*justify-content:center;*/
 }
-/*background color*/
+/*background color not body*/
 header, main, .nav, footer 
 {
     background-color: black; 
-    /*text-align: center; */
-    /*margin-left: auto;*/
-    /*margin-right: auto;*/
-    /*width: 8em;*/
-    /*justify-content:center;*/
 }
 .center
 {
@@ -38,7 +29,6 @@ header, main, .nav, footer
 h4{
 	color: white;
 }
-/*align elements*/
 
 /*CSS for Navigation Bar*/
 .leftA
@@ -94,16 +84,16 @@ button:hover{
 	margin-top: 22px;
 }
 
-table
-{
-    margin : 0px auto;
-}
-td
-{
-    padding-right: 10px;
-    font-size: 1.3em;
-    color: white;
-}
+/*table*/
+/*{*/
+/*    margin : 0px auto;*/
+/*}*/
+/*td*/
+/*{*/
+/*    padding-right: 10px;*/
+/*    font-size: 1.3em;*/
+/*    color: white;*/
+/*}*/
 
 td strong
 {
