@@ -43,19 +43,19 @@ h4{
 /*CSS for Navigation Bar*/
 .leftA
 {
-	text-align: center;
-	padding: 14px 16px;
-	text-decoration: none;
-    font-size: 1.7em; 
+    font-size: 1.5em; 
     color: white; 
+	padding: 14px 16px;
+	text-align: center;
+	text-decoration: none;
 }
 .leftA:hover
 {
-    font-size: 2em;
+    font-size: 1.8em;
     color: white;
     text-shadow: 2px 2px 8px cyan;
-    transition: 2s;
     text-decoration: none;
+    transition: 2s;
 }
 
 /*CSS for search bar*/
@@ -71,9 +71,7 @@ h4{
 /*CSS for buttons*/
 button{
 	display: inline-block;
-	/*padding: 5px;*/
 	border:0.1em solid white;
-	/*margin: 15px 23px 15px 0px;*/
 	width: 80px;
 	border-radius: 0.12em;
 	box-sizing: border-box;
@@ -89,11 +87,13 @@ button:hover{
 	background-color: black;
 	border:0.1em solid #80FFFF;
 }
+/*enter*/
 .nav button{
-	margin-top: 14px;
+	margin: 15px 0px 15px 0px;
 }
+/*right of enter*/
 .nav a button{
-	margin-top: 22px;
+	margin: 22px 0px 15px 12px;
 }
 
 table
