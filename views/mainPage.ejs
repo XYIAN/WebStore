@@ -1,47 +1,42 @@
 <% include partials/head.ejs %>
         <h1 class="centerText"> Welcome to our book store! (temp main page) </h1>
         
-        <p class="centerText">Test!!</strong> </p>
-        
         <h3 class="centerText">Info:</h3>
         <p></p>
         
         <img class="centerIMG" src="/img/books.jpg" width="300" alt="Trinity Select library"/>
         
-        <% bookInfo.forEach(function(b) { %>
-            <%= b.title %><br>
-        <% }) %>
-        <!--cover - image to display-->
-        <!--title - book title-->
-        <!--author - name of author-->
-        <!--year - year published?-->
-        <!--price - $ + price-->
-        
-        <!--gridgap-->
         <div class="grid-container">
-            <div class="item1">1</div>
-            <div class="item2">2</div>
-            <div class="item3">3</div>  
-            <div class="item4">4</div>
-            <div class="item5">5</div>
-            <div class="item6">6</div>
-            <div class="item7">7</div>
-            <div class="item8">8</div>
-            <div class="item9">9</div>  
-            <div class="item10">10</div>
-            <div class="item11">11</div>
-            <div class="item12">12</div>
+            <% bookInfo.forEach(function(b) { %>
+            
+                <!--cards displayed with bootstrap-->
+                <div class="card" style="width: 18rem;">
+                    <!--should be able to click on image or title to get details-->
+                    <img class="card-img-top" src="<%= b.cover %>" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title"><%= b.title %></h5>
+                        <!--extra: click on author to get books written by them-->
+                        <a href="#" class="card-link"><%= b.author %></a>, <%= b.year %>
+                        <p class="card-text">$<%= b.price %></p>
+                        <!--view should guide to detail Page-->
+                        <a href="#" class="btn btn-primary">View</a>
+                    </div>
+                </div>
+            <% }) %>
         </div>
+        <!--cover - image to display-->
         
-        <!--card displayed with bootstrap-->
-        <div class="card" style="width: 18rem;">
-            <img class="card-img-top" src="..." alt="Card image cap">
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
-            </div>
-        </div>
+
+        
+        
+        <!--<div class="card" style="width: 18rem;">-->
+        <!--    <img class="card-img-top" src="..." alt="Card image cap">-->
+        <!--    <div class="card-body">-->
+        <!--        <h5 class="card-title">Card title</h5>-->
+        <!--        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>-->
+        <!--        <a href="#" class="btn btn-primary">Go somewhere</a>-->
+        <!--    </div>-->
+        <!--</div>-->
         
         
 <% include partials/footer.ejs %> 

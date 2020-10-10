@@ -86,6 +86,25 @@ button:hover{
 	margin: 22px 0px 15px 12px;
 }
 
+/*CSS for the mainPage.ejs file*/
+.grid-container {
+	/*mobile friendly, items don't overflow*/
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: center;
+	/*gaps between items*/
+	grid-gap: 15px;
+	/*padding around square surrounding items*/
+	padding: 20px;
+	/*background-color: gray;*/
+}
+.grid-container > div {
+	background-color: rgba(255, 255, 255, 0.8);
+	text-align: center;
+	padding: 20px 10px;
+}
+
+
 /*table*/
 /*{*/
 /*    margin : 0px auto;*/
@@ -97,20 +116,20 @@ button:hover{
 /*    color: white;*/
 /*}*/
 
-td strong
-{
-    color : black;
-}
+/*td strong*/
+/*{*/
+/*    color : black;*/
+/*}*/
 
-#table-header
-{
-    background-color: white;
-}
+/*#table-header*/
+/*{*/
+/*    background-color: white;*/
+/*}*/
 
-.table-row
-{
-    background-color: black;
-}
+/*.table-row*/
+/*{*/
+/*    background-color: black;*/
+/*}*/
 ul
 {
     width:500px;
