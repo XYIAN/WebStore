@@ -19,19 +19,19 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
-/* HEROKU ONLINE DB CONNECTION */
+/* HEROKU ONLINE DB CONNECTION *
 if (process.env.JAWSDB_URL) {
 	var connection = mysql.createConnection(process.env.JAWSDB_URL)
-} else {
+} else { */
 	/* Configure LOCAL MySQL DBMS */
 	var connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'yvcruz',
-    password: 'yvcruz',
-    database: 'books_db'
+   	host: 'localhost',
+    	user: 'yvcruz',
+    	password: 'yvcruz',
+    	database: 'books_db'
 	});
 	connection.connect();
-}
+//}
 
 //routes ---can also be POST method vs get
 app.get("/", function(req,res)//root route
