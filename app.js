@@ -2,17 +2,35 @@ const express = require('express');
 const app = express();
 const mysql = require('mysql');
 
+var session = require('express-session');
+var passport = require('passport');
+var bodyParser = require('body-parser');
+
 app.engine('html', require('ejs').renderFile);//render other files
 app.use(express.static("public"));//access img css js or any external file
 app.use(express.static('css'));
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(session({
+  secret: 'Secret',
+  resave: true,
+  saveUninitialized: true
+}));
+app.use(passport.initialize());
+app.use(passport.session());
 
-const connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'jennifer',
-    password: 'jenniferL',
-    database: 'books_db'
-});
-connection.connect();
+//  HEROKU ONLINE DB CONNECTION 
+// if (process.env.JAWSDB_URL) {
+// 	var connection = mysql.createConnection(process.env.JAWSDB_URL)
+// } else { 
+	// Configure LOCAL MySQL DBMS //
+    const connection = mysql.createConnection({
+        host: 'localhost',
+        user: 'jennifer',
+        password: 'jenniferL',
+        database: 'books_db'
+    });
+    connection.connect();
+// } 
 
 //routes ---can also be POST method vs get
 app.get("/", function(req,res)//root route
@@ -22,7 +40,34 @@ app.get("/", function(req,res)//root route
 });
 
 app.get("/login", function(req, res){ // login route
-    res.render("login.ejs");
+    res.render("login.ejs", {loginError: false});
+});
+
+app.post('/login', function(req, res){
+    var stmt = 'select * from user_info where userName=\'' 
+                +req.body.un+'\' '+
+                'and password=\''+
+                req.body.pw+'\'';
+    var user = null;
+    connection.query(stmt, function(error, results){
+        if(results.length){      //user is in db
+            user = results[0].userName;
+            req.session.login = user;
+            res.redirect('/');        
+        }else {                        //user is not in db - do this as a pop up later
+            console.log("Incorrect Login Info");
+            res.render('login.ejs', {loginError: true});
+        }
+    });
+});
+
+/* Logout Route */
+app.get('/logout', function(req, res){
+    if (req.session.login != null) {
+        var name = req.session.login;     
+        req.session.destroy();
+        res.render("logout.ejs", {logoutUser: name});
+    }else res.render("logout.ejs",{logoutUser: "ERROR NO LOG IN"})    
 });
 
 app.get("/signUp", function(req, res){ // sign up route
@@ -30,37 +75,23 @@ app.get("/signUp", function(req, res){ // sign up route
 });
 
 app.get("/main", function(req, res){ // main route
-    // res.render("mainPage", {user: "Jen"});
-    var everything = "select * from book_info;";
+    var stmt = "select cover, title, author, year, price from book_info;";
     
-    var bookInfo = [];
-    // var title = [];
-    // var author = [];
-    // var dict = {
-    //     title: ["title1", "title2"],
-    //     author: ["author1", "autor2"]
-    // }
+    // var bookInfo = [];
     var bookExists = null;
     
-    connection.query(everything, function(error, found){
+    connection.query(stmt, function(error, found){
         if (error) throw error;
         if (found.length){
-            found.forEach(function(b){
-                bookInfo.push(b.title + "\t" + b.author);
+            // found.forEach(function(b){
+                // bookInfo.push(b.cover, b.title, b.author, b.year, b.price);
                 // console.log(b.title + "\t" + b.author);
-            })
+            // })
             bookExists = found;
         }
-        // res.render("mainPage.ejs", {dict: dict});
-        res.render("mainPage.ejs", {bookInfo:bookInfo})
+        res.render("mainPage.ejs", {bookInfo:bookExists})
     });
 });
-
-// cover - image to display
-// title - book title
-// author - name of author
-// year - year published?
-// price - $ + price
 
 
 
