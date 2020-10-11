@@ -6,6 +6,15 @@ var session = require('express-session');
 var passport = require('passport');
 var bodyParser = require('body-parser');
 
+const connection = mysql.createConnection({
+    host: 'localhost',
+    user: 'raul67',
+    password: 'raulP676',
+    database: 'books_db'
+});
+connection.connect();
+
+
 app.engine('html', require('ejs').renderFile);//render other files
 app.use(express.static("public"));//access img css js or any external file
 app.use(express.static('css'));
@@ -73,6 +82,36 @@ app.get('/logout', function(req, res){
 
 app.get("/signUp", function(req, res){ // sign up route
     res.render("signUp.ejs");
+    var user = req.body.newUsername;
+    var password = req.body.newPassword;
+
+    var stmt = 'select * from user_info where userName=\''
+                + req.body.user+'\' '+ 
+                'and passport=\'' + 
+                req.body.password+'\'';
+    var new_user = null;
+    var new_password = null;
+    connection.query(stmt, function(error, results){
+    if(results == null){      //user is in db
+        new_user = user;
+        new_password = password;
+        req.session.signUp = user;
+        var random = Math.floor(Math.random() * 100);
+        
+        var sql_data = 'insert * into user_info where userName\''
+                        + req.body.new_user +'\' '
+                        + 'and password=\'' + 
+                        req.body.new_password+'\''
+                        + 'and userId=\'' + 
+                        req.body.random+'\'';
+                        
+        res.redirect('/');        
+        }else {                        //user is not in db - do this as a pop up later
+          console.log("User Already Exists! Info");
+          res.render('signUp.ejs', {loginError: true});
+        }
+    });
+    
 });
 
 app.get("/main", function(req, res){ // main route
