@@ -32,13 +32,7 @@ app.use(passport.session());
 // 	var connection = mysql.createConnection(process.env.JAWSDB_URL)
 // } else { 
 	// Configure LOCAL MySQL DBMS //
-    const connection = mysql.createConnection({
-        host: 'localhost',
-        user: 'jennifer',
-        password: 'jenniferL',
-        database: 'books_db'
-    });
-    connection.connect();
+   
 // } 
 
 // ROUTES ---can also be POST method vs get
