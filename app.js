@@ -27,26 +27,40 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-
-/* HEROKU ONLINE DB CONNECTION 
-if (process.env.JAWSDB_URL) {
-	var connection = mysql.createConnection(process.env.JAWSDB_URL)
-} else { 
+//  HEROKU ONLINE DB CONNECTION 
+// if (process.env.JAWSDB_URL) {
+// 	var connection = mysql.createConnection(process.env.JAWSDB_URL)
+// } else { 
 	// Configure LOCAL MySQL DBMS //
-	const connection = mysql.createConnection({
-   		host: 'localhost',
-    		user: 'yvcruz',
-    		password: 'yvcruz',
-    		database: 'books_db'
-	});
-	connection.connect();
-} */
+    const connection = mysql.createConnection({
+        host: 'localhost',
+        user: 'jennifer',
+        password: 'jenniferL',
+        database: 'books_db'
+    });
+    connection.connect();
+// } 
 
-//routes ---can also be POST method vs get
-app.get("/", function(req,res)//root route
+// ROUTES ---can also be POST method vs get
+app.get("/", function(req,res) //root route
 {
-   res.render("index.ejs");//HOME PAGE
-   //res.send("it works!"); 
+    var stmt = "select cover, title, author, year, price from book_info;";
+    
+    var bookExists = null;
+    
+    connection.query(stmt, function(error, found){
+        if (error) throw error;
+        if (found.length){ bookExists = found; }
+        res.render("index.ejs", {bookInfo:bookExists})
+    });
+});
+
+app.get("/contact", function(req, res){ // contact route
+    res.render("contact.ejs");
+});
+
+app.get("/about", function(req, res){ // about route
+    res.render("about.ejs");
 });
 
 app.get("/login", function(req, res){ // login route
@@ -113,39 +127,6 @@ app.get("/signUp", function(req, res){ // sign up route
     });
     
 });
-
-app.get("/main", function(req, res){ // main route
-    // res.render("mainPage", {user: "Jen"});
-    var everything = "select * from book_info;";
-    
-    var bookInfo = [];
-    // var title = [];
-    // var author = [];
-    // var dict = {
-    //     title: ["title1", "title2"],
-    //     author: ["author1", "autor2"]
-    // }
-    var bookExists = null;
-    
-    connection.query(everything, function(error, found){
-        if (error) throw error;
-        if (found.length){
-            found.forEach(function(b){
-                bookInfo.push(b.title + "\t" + b.author);
-                // console.log(b.title + "\t" + b.author);
-            })
-            bookExists = found;
-        }
-        // res.render("mainPage.ejs", {dict: dict});
-        res.render("mainPage.ejs", {bookInfo:bookInfo})
-    });
-});
-
-// cover - image to display
-// title - book title
-// author - name of author
-// year - year published?
-// price - $ + price
 
 
 

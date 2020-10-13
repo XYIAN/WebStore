@@ -1,22 +1,13 @@
+/*background color body*/
 body { 
     background-color : white; 
     color:black; 
     font-family: 'Source Sans Pro', sans-serif;
-    /*#1FDED5 --cyan*/
-    /*margin-left: auto;*/
-    /*margin-right: auto;*/
-    /*width: 23em;*/
-    /*justify-content:center;*/
 }
-/*background color*/
+/*background color not body*/
 header, main, .nav, footer 
 {
     background-color: black; 
-    /*text-align: center; */
-    /*margin-left: auto;*/
-    /*margin-right: auto;*/
-    /*width: 8em;*/
-    /*justify-content:center;*/
 }
 .center
 {
@@ -38,25 +29,23 @@ header, main, .nav, footer
 h4{
 	color: white;
 }
-/*align elements*/
 
 /*CSS for Navigation Bar*/
 .leftA
 {
-	text-align: center;
-	padding: 14px 16px;
-	text-decoration: none;
-    font-size: 1.7em; 
-    text-decoration: none;
+    font-size: 1.5em; 
     color: white; 
+	padding: 14px 16px;
+	text-align: center;
+	text-decoration: none;
 }
 .leftA:hover
 {
-    font-size: 2em;
+    font-size: 1.8em;
     color: white;
     text-shadow: 2px 2px 8px cyan;
-    transition: 2s;
     text-decoration: none;
+    transition: 2s;
 }
 
 /*CSS for search bar*/
@@ -72,10 +61,8 @@ h4{
 /*CSS for buttons*/
 button{
 	display: inline-block;
-	/*padding: 5px;*/
 	border:0.1em solid white;
-	margin: 15px 23px 15px 0px;
-	width: 90px;
+	width: 80px;
 	border-radius: 0.12em;
 	box-sizing: border-box;
 	text-decoration:none;
@@ -90,35 +77,59 @@ button:hover{
 	background-color: black;
 	border:0.1em solid #80FFFF;
 }
+/*enter*/
+.nav button{
+	margin: 15px 0px 15px 0px;
+}
+/*right of enter*/
 .nav a button{
-	margin-top: 22px;
+	margin: 22px 0px 15px 12px;
 }
 
-table
-{
-    margin : 0px auto;
+/*CSS for the mainPage.ejs file*/
+.grid-container {
+	/*mobile friendly, items don't overflow*/
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: center;
+	/*gaps between items*/
+	grid-gap: 15px;
+	/*padding around square surrounding items*/
+	padding: 20px;
+	/*background-color: gray;*/
 }
-td
-{
-    padding-right: 10px;
-    font-size: 1.3em;
-    color: white;
-}
-
-td strong
-{
-    color : black;
-}
-
-#table-header
-{
-    background-color: white;
+.grid-container > div {
+	background-color: rgba(255, 255, 255, 0.8);
+	text-align: center;
+	padding: 20px 10px;
 }
 
-.table-row
-{
-    background-color: black;
-}
+
+/*table*/
+/*{*/
+/*    margin : 0px auto;*/
+/*}*/
+/*td*/
+/*{*/
+/*    padding-right: 10px;*/
+/*    font-size: 1.3em;*/
+/*    color: white;*/
+/*}*/
+
+/*td strong*/
+/*{*/
+/*    color : black;*/
+/*}*/
+
+/*#table-header*/
+/*{*/
+/*    background-color: white;*/
+/*}*/
+
+/*.table-row*/
+/*{*/
+/*    background-color: black;*/
+/*}*/
 ul
 {
     width:500px;
