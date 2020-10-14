@@ -6,15 +6,6 @@ var session = require('express-session');
 var passport = require('passport');
 var bodyParser = require('body-parser');
 
-const connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'raul67',
-    password: 'raulP676',
-    database: 'books_db'
-});
-connection.connect();
-
-
 app.engine('html', require('ejs').renderFile);//render other files
 app.use(express.static("public"));//access img css js or any external file
 app.use(express.static('css'));
@@ -28,12 +19,18 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 //  HEROKU ONLINE DB CONNECTION 
-// if (process.env.JAWSDB_URL) {
-// 	var connection = mysql.createConnection(process.env.JAWSDB_URL)
-// } else { 
-	// Configure LOCAL MySQL DBMS //
-   
-// } 
+if (process.env.JAWSDB_URL) {
+	var connection = mysql.createConnection(process.env.JAWSDB_URL)
+} else {
+	/* Configure LOCAL MySQL DBMS */
+	var connection = mysql.createConnection({
+    		host: 'localhost',
+    		user: 'yvcruz',
+    		password: 'yvcruz',
+    		database: 'books_db'
+	});
+	connection.connect();
+} 
 
 // ROUTES ---can also be POST method vs get
 app.get("/", function(req,res) //root route
