@@ -19,23 +19,23 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 //  HEROKU ONLINE DB CONNECTION 
-if (process.env.JAWSDB_URL) {
-	var connection = mysql.createConnection(process.env.JAWSDB_URL)
-} else {
-	/* Configure LOCAL MySQL DBMS */
-	var connection = mysql.createConnection({
-    		host: 'localhost',
-    		user: 'yvcruz',
-    		password: 'yvcruz',
-    		database: 'books_db'
-	});
-	connection.connect();
-} 
+// if (process.env.JAWSDB_URL) {
+// 	var connection = mysql.createConnection(process.env.JAWSDB_URL)
+// } else { 
+	// Configure LOCAL MySQL DBMS //
+    const connection = mysql.createConnection({
+        host: 'localhost',
+        user: 'jennifer',
+        password: 'jenniferL',
+        database: 'books_db'
+    });
+    connection.connect();
+// } 
 
 // ROUTES ---can also be POST method vs get
 app.get("/", function(req,res) //root route
 {
-    var stmt = "select cover, title, author, year, price from book_info;";
+    var stmt = "select bookId, cover, title, author, year, price from book_info;";
     
     var bookExists = null;
     
@@ -43,6 +43,18 @@ app.get("/", function(req,res) //root route
         if (error) throw error;
         if (found.length){ bookExists = found; }
         res.render("index.ejs", {bookInfo:bookExists})
+    });
+});
+
+app.get("/book/:id", function(req, res) { // displays product details
+    var stmt = "select * from book_info where bookId=" + req.params.id + ";";
+    // console.log(stmt)
+    var bookExists = null;
+    
+    connection.query(stmt, function(error, found){
+        if (error) throw error;
+        if (found.length){ bookExists = found; }
+        res.render("productDetail.ejs", {bookInfo:bookExists})
     });
 });
 
