@@ -1,5 +1,10 @@
 /*background color body*/
 body { 
+	margin: 0;
+	font-size: 1rem;
+	font-weight: 600;
+	line-height: 1.5;
+	
     background-color : white; 
     color:black; 
     font-family: 'Source Sans Pro', sans-serif;
@@ -7,27 +12,9 @@ body {
 /*background color not body*/
 header, main, .nav, footer 
 {
+	padding-top: 5px;
+	padding-bottom: 5px;
     background-color: black; 
-}
-.center
-{
-    margin-left: auto;
-    margin-right: auto;
-    width: 8em;
-    justify-content:center;
-}
-.centerText
-{
-    text-align:center ;
-}
-.centerIMG
-{
-    display:      block;
-    margin-left:  auto;
-    margin-right: auto;
-}
-h4{
-	color: white;
 }
 
 /*CSS for Navigation Bar*/
@@ -104,50 +91,45 @@ button:hover{
 	padding: 20px 10px;
 }
 
-
-/*table*/
-/*{*/
-/*    margin : 0px auto;*/
-/*}*/
-/*td*/
-/*{*/
-/*    padding-right: 10px;*/
-/*    font-size: 1.3em;*/
-/*    color: white;*/
-/*}*/
-
-/*td strong*/
-/*{*/
-/*    color : black;*/
-/*}*/
-
-/*#table-header*/
-/*{*/
-/*    background-color: white;*/
-/*}*/
-
-/*.table-row*/
-/*{*/
-/*    background-color: black;*/
-/*}*/
-ul
-{
-    width:500px;
-    margin: 0 auto;
-    text-align : left;
+/*CSS for the productDetail.ejs file*/
+.productDetail-container {
+	display: flex;
+	position: relative;
+	justify-content: space-between;
+	align-items: center;
+	flex-wrap: wrap;
 }
 
-/*align navigation*/
-.footer
-{
-    color:white;
+.productDetailCard {
+	display: flex;
 }
 
 
-.container {
-	padding: 10px;
-	text-align: center;
+
+/* CSS for the footer*/
+
+/*centers the csumb image*/
+.imgCSUMB { 
+    display: block;
+    margin: 20px auto 20px auto;
+    width: 8em;
 }
+/*centers all texts*/
+.centerText {
+    text-align:center ;
+}
+/*centers all images*/
+.centerIMG {
+    display:      block;
+    margin-left:  auto;
+    margin-right: auto;
+}
+h4{
+	color: white;
+}
+
+
+/*----------------------------------------*/
 
 .timer {
 	padding: 10px;

@@ -1,0 +1,41 @@
+<% include partials/head.ejs %>
+
+        <% bookInfo.forEach(function(b) { %>
+        
+	    <div class='form-group row'>
+			<label for='authorId' class='col-sm-4 col-form-label'>book Id</label>
+			<div class='col-sm-4'>
+				<input type='text' class='form-control' id='songId' name='songId' value='<%=b.bookId%>' disabled>
+			</div>
+		</div>
+		<div class='form-group row'>
+			<label for='firstname' class='col-sm-4 col-form-label'>title</label>
+			<div class='col-sm-4'>
+				<input type='text' class='form-control' id='artistName' name='artistName' value='<%=b.title%>' required>
+			</div>
+		</div>
+		<div class='form-group row'>
+			<label for='lastname' class='col-sm-4 col-form-label'>author</label>
+			<div class='col-sm-4'>
+				<input type='text' class='form-control' id='songName' name='songName' value='<%=b.author%>' required>
+			</div>
+		</div>
+		<div class='form-group row'>
+			<label for='dob' class='col-sm-4 col-form-label'>year</label>
+			<div class='col-sm-4'>
+				<textarea class='form-control' rows='10' id='songLyrics' name='songLyrics'><%=b.year%></textarea>
+			</div>
+		</div>
+		
+		<div class='form-group row'>
+			<div class='col-sm-4'>
+			    <a class='btn btn-danger btn-block' href='/loginHome'>Cancel</a>
+			</div>
+			<div class='col-sm-4'>
+				<button class='btn btn-primary btn-block'>Update</button>
+			</div>
+			<div class='col-sm-4'></div>
+		</div>
+		
+		<% }) %>
+<% include partials/footer.ejs %> 
