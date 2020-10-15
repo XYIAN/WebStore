@@ -25,8 +25,8 @@ if (process.env.JAWSDB_URL) {
 	/* Configure LOCAL MySQL DBMS */
 	var connection = mysql.createConnection({
     		host: 'localhost',
-    		user: 'yvcruz',
-    		password: 'yvcruz',
+    		user: 'kyle',
+    		password: 'kyle',
     		database: 'books_db'
 	});
 	connection.connect();
@@ -42,9 +42,10 @@ app.get("/", function(req,res) //root route
     connection.query(stmt, function(error, found){
         if (error) throw error;
         if (found.length){ bookExists = found; }
-        res.render("index.ejs", {bookInfo:bookExists})
+        res.render("index.ejs", {bookInfo:bookExists});
     });
 });
+
 
 app.get("/contact", function(req, res){ // contact route
     res.render("contact.ejs");
@@ -119,6 +120,19 @@ app.get("/signUp", function(req, res){ // sign up route
     
 });
 
+app.get("/search", function(req,res) //search route
+{
+    var stmt = "select cover, title, author, year, price from book_info;";
+    
+    var bookExists = null;
+    
+    connection.query(stmt, function(error, found){
+        if (error) throw error;
+        if (found.length){ bookExists = found; }
+        res.render("search.ejs", {bookInfo:bookExists});
+    });
+});
+
 
 
 //server listener - run server w/ port number
@@ -137,23 +151,6 @@ app.listen(process.env.PORT, process.env.IP , function()//using local host port 
 });
 
 //end basic express code
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 //copy pasters :::
 
