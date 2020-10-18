@@ -48,13 +48,25 @@ app.get("/", function(req,res) //root route
 
 app.get("/book/:id", function(req, res) { // displays product details
     var stmt = "select * from book_info where bookId=" + req.params.id + ";";
-    // console.log(stmt)
+
     var bookExists = null;
     
     connection.query(stmt, function(error, found){
         if (error) throw error;
         if (found.length){ bookExists = found; }
         res.render("productDetail.ejs", {bookInfo:bookExists})
+    });
+});
+
+app.get("/genre/:genre", function(req, res) { // displays books based on genre
+    var stmt = "select * from book_info where genre='" + req.params.genre + "';";
+
+    var bookExists = null;
+    
+    connection.query(stmt, function(error, found){
+        if (error) throw error;
+        if (found.length){ bookExists = found; }
+        res.render("genreDisplay.ejs", {bookInfo:bookExists})
     });
 });
 

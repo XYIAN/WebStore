@@ -1,8 +1,9 @@
 <% include partials/head.ejs %>
         
-        <form action='/book/<%=bookInfo.bookId%>' method='GET'>
-            <div class="productDetail-container" style="background-color: gray;">
+        <form action='/genre/<%=bookInfo.bookId%>' method='GET'>
+            <div class="productDetail-container">
                 <div class="productDetailCard" style="width: 18rem;">
+                    
                     <div class="productImage">
                         <img class="productCardImg" src="<%= bookInfo[0].cover %>" alt="Card image cap">
                     </div>
@@ -14,6 +15,7 @@
                         <h5 class="productInfo"><%= bookInfo[0].price %></h5>
                         <h5 class="productInfo"><%= bookInfo[0].genre %></h5>
                     </div>
+                    
                 </div>
             </div>
         </form>
