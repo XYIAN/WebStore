@@ -1,5 +1,5 @@
 {
-  "name": "kydi19-lab6",
+  "name": "WebStore",
   "version": "1.0.0",
   "description": "lab 6",
   "main": "app.js",
@@ -8,16 +8,17 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/XYIAN/kydi19-lab6.git"
+    "url": "git+https://github.com/XYIAN/WebStore.git"
   },
   "author": "Kyle Dilbeck",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/XYIAN/kydi19-lab6/issues"
+    "url": "https://github.com/XYIAN/WebStore.git/issues"
   },
-  "homepage": "https://github.com/XYIAN/kydi19-lab6#readme",
+  "homepage": "https://github.com/XYIAN/WebStore.git#readme",
   "dependencies": {
     "body-parser": "^1.19.0",
+    "core-util-is": "^1.0.2",
     "ejs": "^2.7.2",
     "express": "^4.17.1",
     "express-session": "^1.17.1",
