@@ -151,7 +151,7 @@ app.post("/signUp", function(req, res){ // sign up route
     
 });
 
-<<<<<<< HEAD
+
 app.post('/', function(req, res) {//index?
     
     var stmt = 'select * from bookInfo where bookId\''
@@ -170,7 +170,7 @@ app.post('/', function(req, res) {//index?
     })
     
 });
-=======
+
 app.get("/search", function(req,res) //search route
 {
     var stmt = "select cover, title, author, year, price from book_info;";
@@ -185,7 +185,6 @@ app.get("/search", function(req,res) //search route
 });
 
 
->>>>>>> bff82360bef33ff5419ea248d19603d38a4543d2
 
 //server listener - run server w/ port number
 //8081(have to include in url) , "0, 0 , 0 , 0" -used for php type
