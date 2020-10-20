@@ -31,7 +31,7 @@
             <a class="leftA" href="/contact"> CONTACT </a>
             
             <form id="searchBar">
-                <input type="text" placeholder="Search by Title, Author, or ISBN...">
+                <input id="search" name="search" value="<%searchTerm%>" type="text" placeholder="Search by Title, Author, or ISBN...">
                 <select name="genre" onchange="this.form.submit()"> 
                     <option value="">Select Genre</option>
                     <option value="novel" <% if (genre == "novel"){ %> selected } <% } %> >novel</option>

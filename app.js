@@ -31,6 +31,35 @@ if (process.env.JAWSDB_URL) {
 	});
 	connection.connect();
 } 
+function search (req, res, next){ //function to allow search of keywork/term, genre or both 
+    var searchTerm = req.query.search; 
+    var genre = req.query.genre; 
+        let query = 'SELECT * FROM book_info'; 
+        if(searchTerm != '' && genre != ''){
+            query = 'SELECT * FROM book_info WHERE Genre = ' + genre + `' AND ( Name LIKE '%` + searchTerm + `%')`;
+        }
+        else if(searchTerm != '' && genre == ''){
+            query = `SELECT * FROM book_info WHERE Name LIKE '%` + searchTerm + `%'`;
+        }
+        else if(searchTerm != '' && genre == ''){
+            query = `SELECT * FROM book_info WHERE Genre LIKE '` + genre + `'`;
+        }
+        connection.query(query, (err, result) => {
+            if(err){
+                req.searchResult = ""; 
+                req.searchTerm = ""; 
+                req.genre = ""; 
+                next(); 
+            }
+            req.searchResult = result; 
+            req.searchTerm = searchTerm; 
+            req.genre = ""; 
+            
+            next(); 
+        });
+        
+        
+}//END SEARCH FUNCTION
 
 // ROUTES ---can also be POST method vs get
 app.get("/", function(req,res) //root route
