@@ -20,15 +20,20 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-//  HEROKU ONLINE DB CONNECTION 
+
 if (process.env.JAWSDB_URL) {
 	var connection = mysql.createConnection(process.env.JAWSDB_URL)
 } else {
 	/* Configure LOCAL MySQL DBMS */
 	var connection = mysql.createConnection({
     		host: 'localhost',
+<<<<<<< HEAD
     		user: 'raul',
     		password: 'raul676',
+=======
+    		user: 'kyle',
+    		password: 'kyle',
+>>>>>>> bff82360bef33ff5419ea248d19603d38a4543d2
     		database: 'books_db'
 	});
 	connection.connect();
@@ -37,14 +42,38 @@ if (process.env.JAWSDB_URL) {
 // ROUTES ---can also be POST method vs get
 app.get("/", function(req,res) //root route
 {
-    var stmt = "select cover, title, author, year, price from book_info;";
+    var stmt = "select bookId, cover, title, author, year, price from book_info;";
     
     var bookExists = null;
     
     connection.query(stmt, function(error, found){
         if (error) throw error;
         if (found.length){ bookExists = found; }
-        res.render("index.ejs", {bookInfo:bookExists})
+        res.render("index.ejs", {bookInfo:bookExists});
+    });
+});
+
+app.get("/book/:id", function(req, res) { // displays product details
+    var stmt = "select * from book_info where bookId=" + req.params.id + ";";
+
+    var bookExists = null;
+    
+    connection.query(stmt, function(error, found){
+        if (error) throw error;
+        if (found.length){ bookExists = found; }
+        res.render("productDetail.ejs", {bookInfo:bookExists})
+    });
+});
+
+app.get("/genre/:genre", function(req, res) { // displays books based on genre
+    var stmt = "select * from book_info where genre='" + req.params.genre + "';";
+
+    var bookExists = null;
+    
+    connection.query(stmt, function(error, found){
+        if (error) throw error;
+        if (found.length){ bookExists = found; }
+        res.render("genreDisplay.ejs", {bookInfo:bookExists})
     });
 });
 
@@ -127,6 +156,7 @@ app.post("/signUp", function(req, res){ // sign up route
     
 });
 
+<<<<<<< HEAD
 app.post('/', function(req, res) {//index?
     
     var stmt = 'select * from bookInfo where bookId\''
@@ -145,6 +175,22 @@ app.post('/', function(req, res) {//index?
     })
     
 });
+=======
+app.get("/search", function(req,res) //search route
+{
+    var stmt = "select cover, title, author, year, price from book_info;";
+    
+    var bookExists = null;
+    
+    connection.query(stmt, function(error, found){
+        if (error) throw error;
+        if (found.length){ bookExists = found; }
+        res.render("search.ejs", {bookInfo:bookExists});
+    });
+});
+
+
+>>>>>>> bff82360bef33ff5419ea248d19603d38a4543d2
 
 //server listener - run server w/ port number
 //8081(have to include in url) , "0, 0 , 0 , 0" -used for php type
@@ -162,23 +208,6 @@ app.listen(process.env.PORT, process.env.IP , function()//using local host port 
 });
 
 //end basic express code
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 //copy pasters :::
 
