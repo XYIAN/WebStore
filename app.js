@@ -6,8 +6,6 @@ var session = require('express-session');
 var passport = require('passport');
 var bodyParser = require('body-parser');
 
-var cart_qty =0;
-var total = 0;
 app.engine('html', require('ejs').renderFile);//render other files
 app.use(express.static("public"));//access img css js or any external file
 app.use(express.static('css'));
@@ -84,8 +82,6 @@ app.get("/login", function(req, res){ // login route
     res.render("login.ejs", {loginError: false});
 });
 
-
-
 app.post('/login', function(req, res){
     var stmt = 'select * from user_info where userName=\'' 
                 +req.body.un+'\' '+
@@ -96,10 +92,7 @@ app.post('/login', function(req, res){
         if(results.length){      //user is in db
             user = results[0].userName;
             req.session.login = user;
-            res.redirect('/');
-            
-            res.render('login.ejs', {loggedIn: true});//show cart  raul
-            
+            res.redirect('/');        
         }else {                        //user is not in db - do this as a pop up later
             console.log("Incorrect Login Info");
             res.render('login.ejs', {loginError: true});
@@ -112,13 +105,12 @@ app.get('/logout', function(req, res){
     if (req.session.login != null) {
         var name = req.session.login;     
         req.session.destroy();
-        req.body.loggedIn = false;// raul
         res.render("logout.ejs", {logoutUser: name});
     }else res.render("logout.ejs",{logoutUser: "ERROR NO LOG IN"})    
 });
 
-app.post("/signUp", function(req, res){ // sign up route
-    //res.render("signUp.ejs");
+app.get("/signUp", function(req, res){ // sign up route
+    res.render("signUp.ejs");
     var user = req.body.newUsername;
     var password = req.body.newPassword;
 
@@ -133,7 +125,7 @@ app.post("/signUp", function(req, res){ // sign up route
         new_user = user;
         new_password = password;
         req.session.signUp = user;
-        var random = Math.floor(Math.random() * 1000);
+        var random = Math.floor(Math.random() * 100);
         
         var sql_data = 'insert * into user_info where userName\''
                         + req.body.new_user +'\' '
@@ -148,26 +140,6 @@ app.post("/signUp", function(req, res){ // sign up route
           res.render('signUp.ejs', {loginError: true});
         }
     });
-    
-});
-
-
-app.post('/', function(req, res) {//index?
-    
-    var stmt = 'select * from bookInfo where bookId\''
-                    + req.body.id + '\'' 
-                    + 'and inStock=\'' +
-                    req.body.instock + '\''
-                    + 'and price=\'' +
-                    req.body.price+'\'';
-                    
-    connection.query(stmt, function(error, results) {
-        if(results[0].inStock ==0){
-            cart_qty += 1;
-            total = results[0].pricea + total;
-            
-        }
-    })
     
 });
 
