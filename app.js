@@ -25,8 +25,8 @@ if (process.env.JAWSDB_URL) {
 	/* Configure LOCAL MySQL DBMS */
 	var connection = mysql.createConnection({
     		host: 'localhost',
-    		user: 'kyle',
-    		password: 'kyle',
+    		user: 'jennifer',
+    		password: 'jenniferL',
     		database: 'books_db'
 	});
 	connection.connect();
