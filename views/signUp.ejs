@@ -23,7 +23,7 @@
                 <input id = "newPassword" type = "password">
                  <br>
                  <p>Confirm Password.</p>
-                 <input id = "confirmPassowrd" type = "password">
+                 <input id = "confirmPassword" type = "password">
                 
                  <br><br>
                 
@@ -34,44 +34,18 @@
                         <h1 class="centerText" style="color:red;">Username Taken!</h1>
                         <%}%>
 
+                <%if(dontMatch){%>
+                    <strong>User name Taken!</strong>
+                    <br>
+                    <%}%>
+
+
                 </div>
 
         
         <img class="centerIMG" src="/img/books.jpg" width="300" alt="Trinity Select library"/>
         
-        
-        <h2>Welcome to the Login Page</h2>
-        
-         <!--  raul-->
-
-                <div class = "LoginClass">
-                
-                <link href="css/styles.css" rel="stylesheet" type="text/css" />
-                
-                <h2>Welcome to the Login Page</h2>
-                
-                <img  src="img/newuserbook.jpg" width="300" alt="Trinity Select library"/>
-                
-                <p>Please enter a username</p>
-                <p>User name must contain numbers and characters only.</p>
-                <input id = "newUsername" type = "text"> 
-                <br>
-                <p>Password Must be 8 characters long.</p>
-                <input id = "newPassword" type = "password">
-                 <br>
-                 <p>Confirm Password.</p>
-                 <input id = "confirmPassowrd" type = "password">
-                
-                 <br><br>
-                
-                <button id = "newUserButton">Confirm New User </button>
-                <br><br>
-                
-                <p id = "errorMsgnew"></p>
-                
-                </div>
-
-         <!--  raul-->
+    
         
         <h4 id="bottomInfo"> This will be the Sign Up! </h4>
         
