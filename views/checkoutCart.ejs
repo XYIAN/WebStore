@@ -1,0 +1,25 @@
+<% include partials/head.ejs %>
+        
+        <h1 class ="centerText">Checkout Cart Items</h1> <br>
+        <%if(results){%>
+                <table class ="centerText" style="width:100%">
+                        <tr>
+                                <th>Title</th>
+                                <th>Quantity</th>
+                                <th>Price per Book</th> 
+                        </tr>        
+                </table>
+                <%inCart.forEach(function(book){%>
+                        <tr>
+                                <td><%=book.title%></td>
+                                <td><%=book.quantity%></td>
+                                <td><%=book.price%></td>
+                        </tr>
+                <%});%>
+        <%}
+        else {%>
+        <h1 class ="centerText">No Items in Cart!</h1> <br>
+        <%}%>
+        
+        
+<% include partials/footer.ejs %> 
