@@ -6,8 +6,10 @@ var session = require('express-session');
 var passport = require('passport');
 var bodyParser = require('body-parser');
 
+
 var cart_qty =0;
 var total = 0;
+
 app.engine('html', require('ejs').renderFile);//render other files
 app.use(express.static("public"));//access img css js or any external file
 app.use(express.static('css'));
@@ -80,9 +82,6 @@ app.get("/about", function(req, res){ // about route
     res.render("about.ejs");
 });
 
-app.get("/login", function(req, res){ // login route
-    res.render("login.ejs", {loginError: false});
-});
 
 
 
@@ -149,6 +148,7 @@ app.get("/signUp", function(req, res){ // sign up route
         }
     });
     
+
     var username = app.get("#newUsername");
     var password = app.get("#newPassword");
     var confirmpass = app.get("#confirmPassowrd");
@@ -167,6 +167,21 @@ app.get("/signUp", function(req, res){ // sign up route
 
 app.get("/main", function(req, res){ // main route
     res.render("mainPage.ejs");
+
+});
+
+app.get("/search", function(req,res) //search route
+{
+    var stmt = "select cover, title, author, year, price from book_info;";
+    
+    var bookExists = null;
+    
+    connection.query(stmt, function(error, found){
+        if (error) throw error;
+        if (found.length){ bookExists = found; }
+        res.render("search.ejs", {bookInfo:bookExists});
+    });
+
 });
 
 app.get("/search", function(req,res) //search route
@@ -200,6 +215,7 @@ app.listen(process.env.PORT, process.env.IP , function()//using local host port 
 });
 
 //end basic express code
+
 //copy pasters :::
 
 // const express = require('express'); 

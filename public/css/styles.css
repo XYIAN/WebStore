@@ -1,62 +1,38 @@
+/*background color body*/
 body { 
+	margin: 0;
+	font-size: 1rem;
+	font-weight: 600;
+	line-height: 1.5;
+	
     background-color : white; 
     color:black; 
     font-family: 'Source Sans Pro', sans-serif;
-    /*#1FDED5 --cyan*/
-    /*margin-left: auto;*/
-    /*margin-right: auto;*/
-    /*width: 23em;*/
-    /*justify-content:center;*/
 }
-/*background color*/
+/*background color not body*/
 header, main, .nav, footer 
 {
+	padding-top: 5px;
+	padding-bottom: 5px;
     background-color: black; 
-    /*text-align: center; */
-    /*margin-left: auto;*/
-    /*margin-right: auto;*/
-    /*width: 8em;*/
-    /*justify-content:center;*/
 }
-.center
-{
-    margin-left: auto;
-    margin-right: auto;
-    width: 8em;
-    justify-content:center;
-}
-.centerText
-{
-    text-align:center ;
-}
-.centerIMG
-{
-    display:      block;
-    margin-left:  auto;
-    margin-right: auto;
-}
-h4{
-	color: white;
-}
-/*align elements*/
 
 /*CSS for Navigation Bar*/
 .leftA
 {
-	text-align: center;
-	padding: 14px 16px;
-	text-decoration: none;
-    font-size: 1.7em; 
-    text-decoration: none;
+    font-size: 1.5em; 
     color: white; 
+	padding: 14px 16px;
+	text-align: center;
+	text-decoration: none;
 }
 .leftA:hover
 {
-    font-size: 2em;
+    font-size: 1.8em;
     color: white;
     text-shadow: 2px 2px 8px cyan;
-    transition: 2s;
     text-decoration: none;
+    transition: 2s;
 }
 
 /*CSS for search bar*/
@@ -72,10 +48,8 @@ h4{
 /*CSS for buttons*/
 button{
 	display: inline-block;
-	/*padding: 5px;*/
 	border:0.1em solid white;
-	margin: 15px 23px 15px 0px;
-	width: 90px;
+	width: 80px;
 	border-radius: 0.12em;
 	box-sizing: border-box;
 	text-decoration:none;
@@ -90,53 +64,216 @@ button:hover{
 	background-color: black;
 	border:0.1em solid #80FFFF;
 }
+/*enter*/
+.nav button{
+	margin: 15px 0px 15px 0px;
+}
+/*right of enter*/
 .nav a button{
-	margin-top: 22px;
+	margin: 22px 0px 15px 12px;
 }
 
-table
-{
-    margin : 0px auto;
+/*CSS for the index.ejs file*/
+.grid-container {
+	/*mobile friendly, items don't overflow*/
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: center;
+	/*gaps between items*/
+	grid-gap: 15px;
+	
+	/*padding around square surrounding items*/
+	padding: 20px;
 }
-td
-{
-    padding-right: 10px;
-    font-size: 1.3em;
-    color: white;
-}
-
-td strong
-{
-    color : black;
-}
-
-#table-header
-{
-    background-color: white;
-}
-
-.table-row
-{
-    background-color: black;
-}
-ul
-{
-    width:500px;
-    margin: 0 auto;
-    text-align : left;
-}
-
-/*align navigation*/
-.footer
-{
-    color:white;
-}
-
-
-.container {
-	padding: 10px;
+.grid-container > div {
+	background-color: rgba(255, 255, 255, 0.8);
 	text-align: center;
+	padding: 20px 10px;
 }
+
+/*CSS for the productDetail.ejs file*/
+.productDetail-container {
+	display: flex;
+	position: relative;
+	justify-content: space-between;
+	align-items: center;
+	flex-wrap: wrap;
+}
+.productDetailCard {
+	display: flex;
+}
+
+/*CSS for the hamburger design in index.ejs & genreDisplay.ejs*/
+/*
+ * Made by Erik Terwan
+ * 24th of November 2015
+ * MIT License
+ */
+/* in charge of the three lines */
+#hamburger
+{
+	display: block;
+	position: relative;
+	margin: 20px;
+	z-index: 1;
+}
+
+/* text on menu */
+#hamburger a
+{
+  text-decoration: none;
+  color: black;
+  transition: color 0.8s ease;
+}
+
+/* text color after hovering */
+#hamburger a:hover
+{
+	color: teal;
+	background-color: black;
+	text-shadow: 2px 2px 8px cyan;
+}
+
+/* 
+ * Following two lines blends 
+ * checkbox and hamburger to 
+ * make one functionable menu item
+ */
+#hamburger input /* in charge of checkbox*/
+{
+	/*changes size of checkbox*/
+	display: block;
+	width: 50px;
+	height: 35px;
+	cursor: pointer;
+	
+	/*aligns checkbox*/
+	position: absolute;
+	top: -7px;
+	left: -5px;
+	
+	/*hides the checkbox*/
+	opacity: 0;
+	
+	/*places checkbox over hamburger to allow*/
+	/*to click on hamburger and exit out of it*/
+	z-index: 2;
+}
+#hamburger span /* in charge of hamburger logo*/
+{
+	/*makes hamburger logo same size as checkbox*/
+	display: block;
+	width: 40px;
+	height: 5px;
+	background: black;
+	border-radius: 3px;
+	
+	/*positions hamburger logo with checkbox*/
+	margin-bottom: 5px;
+	position: relative;
+	
+	/*places X over hamburger to appear with menu*/
+	z-index: 1;
+	
+	/*smoothes transition from hamburger logo to X*/
+	transform-origin: 6px 0px;
+	transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+				background 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+				opacity 0.55s ease;
+}
+
+/*
+ * Transforms hamburger logo 
+ * into  a crossmark
+ */
+#hamburger span:first-child
+{
+  transform-origin: 0% 0%;
+}
+#hamburger span:nth-last-child(2)
+{
+  transform-origin: 0% 100%;
+}
+/*makes crossmark visible*/
+#hamburger input:checked ~ span 
+{
+	opacity: 1;
+	transform: rotate(45deg) translate(0px, -1px);
+	background: black;
+}
+/*should hide middle line, opacity doesn't work atm*/
+#hamburger input:checked ~ span:nth-last-child(2)
+{
+  opacity: 0;
+  transform: rotate(0deg) scale(0.2, 0.2);
+  /*color: red;*/
+}
+/*third line goes up*/
+#hamburger input:checked ~ span:nth-last-child(3)
+{
+  transform: rotate(-45deg) translate(0, -1px);
+}
+
+/*
+ * Make this absolute positioned
+ * at the top left of the screen
+ * Will appear when hamburger the
+ * hamburger logo is pressed
+ */
+#menu
+{
+  position: absolute;
+  list-style-type: none;
+  background: #ededed;
+  width: 300px;
+  
+  /*sets menu how it should look when it pops*/
+  margin: -100px 0 0 -50px;
+  padding: 125px 50px 50px 50px;
+  
+  /*hides menu unless hamburger is clicked on*/
+  transform: translate(-100%, 0);
+  
+  /*adds animation to when menu appears*/
+  transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+}
+
+#menu li
+{
+  padding: 10px 0;
+  font-size: 22px;
+}
+
+/*lets menu slide from the left*/
+#hamburger input:checked ~ ul
+{
+  transform: none;
+}
+
+/* CSS for the footer*/
+
+/*centers the csumb image*/
+.imgCSUMB { 
+    display: block;
+    margin: 20px auto 20px auto;
+    width: 8em;
+}
+/*centers all texts*/
+.centerText {
+    text-align:center ;
+}
+/*centers all images*/
+.centerIMG {
+    display:      block;
+    margin-left:  auto;
+    margin-right: auto;
+}
+h4{
+	color: white;
+}
+
+
+/*----------------------------------------*/
 
 .timer {
 	padding: 10px;

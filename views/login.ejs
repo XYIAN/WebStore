@@ -1,13 +1,24 @@
 <% include partials/head.ejs %>
-        <h1 class="centerText"> This will be the Log In! </h1>
+        <h1 class="centerText"> Log In Here! </h1>
+        <br>
         
-        <p class="centerText">cite is currently<strong>under construction</strong> </p>
-        
-        <h3 class="centerText">Info:</h3>
+        <h3 class="centerText">
+        	<form action='/login' method='POST'>
+			<label for='user'>Username: </label>
+			<input type='text' id='un' name='un' placeholder='Username' required>
+			<br>
+			<label for='pass'>Password: </label>				
+			<input type='password' id='pw' name='pw' placeholder='Password' required>
+			<br>
+			<button>Login</button>
+				<%if(loginError){%>
+	        	                <h1 class="centerText" style="color:red;">Incorrect Credentials!</h1>
+				<%}%>
+		</form>
+        </h3>
         <p></p>
         
         <img class="centerIMG" src="/img/books.jpg" width="300" alt="Trinity Select library"/>
         
-        <h4 id="bottomInfo"> This will be the Log In! </h4>
         
 <% include partials/footer.ejs %> 
