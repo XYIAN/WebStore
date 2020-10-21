@@ -31,7 +31,7 @@ if (process.env.JAWSDB_URL) {
 	});
 	connection.connect();
 } 
-function search (req, res, next){ //function to allow search of keywork/term, genre or both 
+function search (req, res){ //function to allow search of keywork/term, genre or both 
     var searchTerm = req.query.search; 
     var genre = req.query.genre; 
         let query = 'SELECT * FROM book_info'; 
@@ -49,13 +49,13 @@ function search (req, res, next){ //function to allow search of keywork/term, ge
                 req.searchResult = ""; 
                 req.searchTerm = ""; 
                 req.genre = ""; 
-                next(); 
+                //next(); 
             }
             req.searchResult = result; 
             req.searchTerm = searchTerm; 
             req.genre = ""; 
             
-            next(); 
+           // next(); 
         });
         
         
@@ -64,6 +64,7 @@ function search (req, res, next){ //function to allow search of keywork/term, ge
 // ROUTES ---can also be POST method vs get
 app.get("/", function(req,res) //root route
 {
+    //search(req,res);
     var stmt = "select bookId, cover, title, author, year, price from book_info;";
     
     var bookExists = null;
