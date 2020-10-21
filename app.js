@@ -172,16 +172,13 @@ app.get("/signUp", function(req, res){ // sign up route
     
 });
 
-app.get("/search", function(req,res) //search route
-{
-    var stmt = "select cover, title, author, year, price from book_info;";
-    
-    var bookExists = null;
-    
-    connection.query(stmt, function(error, found){
-        if (error) throw error;
-        if (found.length){ bookExists = found; }
-        res.render("search.ejs", {bookInfo:bookExists});
+app.get("/search", search, (req, res) =>{
+    var searchResult = req.searchResult; 
+    res.render('search.ejs', {
+        results: searchResult.length, 
+        searchTerm: req.searchTerm, 
+        searchResult: searchResult, 
+        genre: req.genre
     });
 });
 
