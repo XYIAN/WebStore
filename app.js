@@ -1,38 +1,153 @@
 const express = require('express'); 
 const app = express();
 const mysql = require('mysql');
-// const path = require('path')
 
-const connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'raul6767',
-    password: 'raulP676',
-    database: 'book_db'
-});
-connection.connect();
+var session = require('express-session');
+var passport = require('passport');
+var bodyParser = require('body-parser');
 
+var cart_qty =0;
+var total = 0;
 app.engine('html', require('ejs').renderFile);//render other files
 app.use(express.static("public"));//access img css js or any external file
+app.use(express.static('css'));
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(session({
+  secret: 'Secret',
+  resave: true,
+  saveUninitialized: true
+}));
+app.use(passport.initialize());
+app.use(passport.session());
 
-//routes ---can also be POST method vs get
-app.get("/", function(req,res)//root route
+
+if (process.env.JAWSDB_URL) {
+	var connection = mysql.createConnection(process.env.JAWSDB_URL)
+} else {
+	/* Configure LOCAL MySQL DBMS */
+	var connection = mysql.createConnection({
+    		host: 'localhost',
+    		user: 'raul',
+    		password: 'raul676',
+    		database: 'books_db'
+	});
+	connection.connect();
+} 
+
+// ROUTES ---can also be POST method vs get
+app.get("/", function(req,res) //root route
 {
-   res.render("index.ejs");//HOME PAGE
-   //res.send("it works!"); 
+    var stmt = "select bookId, cover, title, author, year, price from book_info;";
+    
+    var bookExists = null;
+    
+    connection.query(stmt, function(error, found){
+        if (error) throw error;
+        if (found.length){ bookExists = found; }
+        res.render("index.ejs", {bookInfo:bookExists});
+    });
+});
+
+app.get("/book/:id", function(req, res) { // displays product details
+    var stmt = "select * from book_info where bookId=" + req.params.id + ";";
+
+    var bookExists = null;
+    
+    connection.query(stmt, function(error, found){
+        if (error) throw error;
+        if (found.length){ bookExists = found; }
+        res.render("productDetail.ejs", {bookInfo:bookExists})
+    });
+});
+
+app.get("/genre/:genre", function(req, res) { // displays books based on genre
+    var stmt = "select * from book_info where genre='" + req.params.genre + "';";
+
+    var bookExists = null;
+    
+    connection.query(stmt, function(error, found){
+        if (error) throw error;
+        if (found.length){ bookExists = found; }
+        res.render("genreDisplay.ejs", {bookInfo:bookExists})
+    });
+});
+
+app.get("/contact", function(req, res){ // contact route
+    res.render("contact.ejs");
+});
+
+app.get("/about", function(req, res){ // about route
+    res.render("about.ejs");
 });
 
 app.get("/login", function(req, res){ // login route
-    res.render("login.ejs");
+    res.render("login.ejs", {loginError: false});
 });
+
+
+
+app.post('/login', function(req, res){
+    var stmt = 'select * from user_info where userName=\'' 
+                +req.body.un+'\' '+
+                'and password=\''+
+                req.body.pw+'\'';
+    var user = null;
+    connection.query(stmt, function(error, results){
+        if(results.length){      //user is in db
+            user = results[0].userName;
+            req.session.login = user;
+            res.redirect('/');
+            
+            res.render('login.ejs', {loggedIn: true});//show cart  raul
+            
+        }else {                        //user is not in db - do this as a pop up later
+            console.log("Incorrect Login Info");
+            res.render('login.ejs', {loginError: true});
+        }
+    });
+});
+
+/* Logout Route */
+app.get('/logout', function(req, res){
+    if (req.session.login != null) {
+        var name = req.session.login;     
+        req.session.destroy();
+        res.render("logout.ejs", {logoutUser: name});
+    }else res.render("logout.ejs",{logoutUser: "ERROR NO LOG IN"})    
+});
+
 
 app.get("/signUp", function(req, res){ // sign up route
     res.render("signUp.ejs");
-    
-    
-});
-/*
-app.listen("click", function(){
-    app.get("#newUserButton");
+    var user = req.body.newUsername;
+    var password = req.body.newPassword;
+
+    var stmt = 'select * from user_info where userName=\''
+                + req.body.user+'\' '+ 
+                'and passport=\'' + 
+                req.body.password+'\'';
+    var new_user = null;
+    var new_password = null;
+    connection.query(stmt, function(error, results){
+    if(results == null){      //user is in db
+        new_user = user;
+        new_password = password;
+        req.session.signUp = user;
+        var random = Math.floor(Math.random() * 100);
+        
+        var sql_data = 'insert * into user_info where userName\''
+                        + req.body.new_user +'\' '
+                        + 'and password=\'' + 
+                        req.body.new_password+'\''
+                        + 'and userId=\'' + 
+                        req.body.random+'\'';
+                        
+        res.redirect('/');        
+        }else {                        //user is not in db - do this as a pop up later
+          console.log("User Already Exists! Info");
+          res.render('signUp.ejs', {loginError: true});
+        }
+    });
     
     var username = app.get("#newUsername");
     var password = app.get("#newPassword");
@@ -48,10 +163,23 @@ app.listen("click", function(){
     }
     
 });
-*/
+
 
 app.get("/main", function(req, res){ // main route
     res.render("mainPage.ejs");
+});
+
+app.get("/search", function(req,res) //search route
+{
+    var stmt = "select cover, title, author, year, price from book_info;";
+    
+    var bookExists = null;
+    
+    connection.query(stmt, function(error, found){
+        if (error) throw error;
+        if (found.length){ bookExists = found; }
+        res.render("search.ejs", {bookInfo:bookExists});
+    });
 });
 
 
@@ -72,24 +200,6 @@ app.listen(process.env.PORT, process.env.IP , function()//using local host port 
 });
 
 //end basic express code
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 //copy pasters :::
 
 // const express = require('express'); 
