@@ -1,33 +1,49 @@
 <% include partials/head.ejs %>
-        <h1 class="centerText"> Welcome our book store! </h1>
+<script>
+$(document).ready(function(){
+        <% for (var i = 0; i < searchResult.length; i++) { %>
+        document.getElementById('result').innerHTML += '<p> <%= searchResult[i]['ID'] %>.<%= searchResult[i]['Name'] %></p>'
+        document.getElementById('result').innerHTML += '<p> Item Genre: <%= searchResult[i]['genre']   %></p>'
+        document.getElementById('result').innerHTML += '<p> Price: <%= searchResult[i]['Price'] %> $</p>'
+        <% } %>
+});
+</script>
+        <!--search result filler-->
+        <div id="result"></div>
         
-        <p class="centerText">cite is currently<strong>under construction</strong> </p>
         
-        <h3 class="centerText">Info:</h3>
-        <p></p>
         
-        Results:
-        <div id="results">
-                <img class="centerIMG" src="/img/books.jpg" width="300" alt="Trinity Select library"/>
-                <img class="centerIMG" src="/img/books.jpg" width="300" alt="Trinity Select library"/>
-                <span id="r1"></span>
-                <span id="r2"></span>
-                <span id="r3"></span>
-                <span id="r4"></span>
-                <div id="innerResultDiv"></div>
         
-        </div>
+        
+        <!--<h1 class="centerText"> Welcome our book store! </h1>-->
+        
+        <!--<p class="centerText">cite is currently<strong>under construction</strong> </p>-->
+        
+        <!--<h3 class="centerText">Info:</h3>-->
+        <!--<p></p>-->
+        
+        <!--Results:-->
+        <!--<div id="results">-->
+        <!--        <img class="centerIMG" src="/img/books.jpg" width="300" alt="Trinity Select library"/>-->
+        <!--        <img class="centerIMG" src="/img/books.jpg" width="300" alt="Trinity Select library"/>-->
+        <!--        <span id="r1"></span>-->
+        <!--        <span id="r2"></span>-->
+        <!--        <span id="r3"></span>-->
+        <!--        <span id="r4"></span>-->
+        <!--        <div id="innerResultDiv"></div>-->
+        
+        <!--</div>-->
                 
-        Suggestions: 
-        <div id="suggestions">
-                <img class="centerIMG" src="/img/books.jpg" width="300" alt="Trinity Select library"/>
-                <img class="centerIMG" src="/img/books.jpg" width="300" alt="Trinity Select library"/>
+        <!--Suggestions: -->
+        <!--<div id="suggestions">-->
+        <!--        <img class="centerIMG" src="/img/books.jpg" width="300" alt="Trinity Select library"/>-->
+        <!--        <img class="centerIMG" src="/img/books.jpg" width="300" alt="Trinity Select library"/>-->
         
-        </div>
+        <!--</div>-->
                 
         
         
-           <h2>Search Results</h2>
-           <div id="results"></div>
+        <!--   <h2>Search Results</h2>-->
+        <!--   <div id="results"></div>-->
         
 <% include partials/footer.ejs %> 
