@@ -94,13 +94,17 @@ button:hover{
 /*CSS for the productDetail.ejs file*/
 .productDetail-container {
 	display: flex;
-	position: relative;
-	justify-content: space-between;
-	align-items: center;
 	flex-wrap: wrap;
+	/*position: relative;*/
+	/*justify-content: space-between;*/
+	/*align-items: center;*/
+	
+	background-color: teal;
 }
 .productDetailCard {
 	display: flex;
+	padding: 40px;
+	/*background-color: teal;*/
 }
 
 /*CSS for the hamburger design in index.ejs & genreDisplay.ejs*/

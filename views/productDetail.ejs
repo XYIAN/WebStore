@@ -2,11 +2,13 @@
         
         <form action='/genre/<%=bookInfo.bookId%>' method='GET'>
             <div class="productDetail-container">
+                
                 <div class="productDetailCard" style="width: 18rem;">
-                    
+                    <!--this is for the image-->
                     <div class="productImage">
                         <img class="productCardImg" src="<%= bookInfo[0].cover %>" alt="Card image cap">
                     </div>
+                    <!--this is for the product information-->
                     <div class="productContent">
                         <h5 class="productInfo"><%= bookInfo[0].title %></h5>
                         <h5 class="productInfo"><%= bookInfo[0].author %></h5>
@@ -15,8 +17,8 @@
                         <h5 class="productInfo"><%= bookInfo[0].price %></h5>
                         <h5 class="productInfo"><%= bookInfo[0].genre %></h5>
                     </div>
-                    
                 </div>
+                
             </div>
         </form>
         
