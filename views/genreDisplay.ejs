@@ -18,17 +18,14 @@
                 <a href="/6/mythological"><li>Mythological</li></a>
                 <a href="/7/teen"><li>Teen</li></a>
             </ul>
-            <h1 class="centerText"> Welcome to our book store!</h1>
         </div>
-        
-        
-        <img class="centerIMG" src="/img/books.jpg" width="300" alt="Trinity Select library"/>
         
         <form action='/' method='GET'>
             <% if(bookInfo == null) { %>
                 <h1 class="centerText">No available books at the moment!</h1>
             <% } else { %>
                 <!--this is to display product-->
+                <h1 class="centerText">Genre: <%= bookInfo[0].genre %></h1>
                 <div class="grid-container">
                     <% bookInfo.forEach(function(b) { %>
                         <!--cards displayed with bootstrap-->
@@ -38,7 +35,8 @@
                             <div class="card-body">
                                 <h5 class="card-title"><%= b.title %></h5>
                                 <!--extra: click on author to get books written by them-->
-                                by <a href="#" class="card-link"><%= b.author %></a>
+                                <!--by <a href="#" class="card-link">b.author</a>-->
+                                <p>by <%= b.author %></p>
                                 <p class="card-text"><b>$<%= b.price %></b></p>
                                 <!--view should guide to detail Page-->
                                 <a href="/book/<%= b.bookId %>" class="btn btn-dark btn-lg">View</a>
