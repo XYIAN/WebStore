@@ -25,8 +25,8 @@ if (process.env.JAWSDB_URL) {
 	/* Configure LOCAL MySQL DBMS */
 	var connection = mysql.createConnection({
     		host: 'localhost',
-    		user: 'jennifer',
-    		password: 'jenniferL',
+    		user: 'yvcruz',
+    		password: 'yvcruz',
     		database: 'books_db'
 	});
 	connection.connect();
@@ -156,7 +156,31 @@ app.get("/search", function(req,res) //search route
     });
 });
 
+app.get('/checkout',login_check,function(req, res){
+    var stmt = 'select title, quantity, price from order_info left join book_info '+
+               'on order_info.bookId=book_info.bookId ' + 
+               'where userId=\'' + req.session.login + '\'';
+    connection.query(stmt, function(error, results){
+        if(error){
+            throw error;
+        } else if(results.length){ 
+            res.render('checkoutCart.ejs', {results: true, books: results});     
+        } else {                        
+            console.log("No books in cart");
+            res.render('checkoutCart.ejs', {results: false});
+        }
+    });
+});
 
+function login_check(req, res, next) {
+  //  if the user isn't logged in, redirect them to a login page
+  if(!req.session.login) {
+    res.redirect("/login");
+    return; 
+  }
+  //  the user is logged in, so call next()
+  next();
+}
 
 //server listener - run server w/ port number
 //8081(have to include in url) , "0, 0 , 0 , 0" -used for php type
