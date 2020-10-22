@@ -49,7 +49,7 @@ header, main, .nav, footer
 button{
 	display: inline-block;
 	border:0.1em solid white;
-	width: 80px;
+	width: 82px;
 	border-radius: 0.12em;
 	box-sizing: border-box;
 	text-decoration:none;
@@ -66,10 +66,12 @@ button:hover{
 }
 /*enter*/
 .nav button{
+	/*background-color: green;*/
 	margin: 15px 0px 15px 0px;
 }
 /*right of enter*/
 .nav a button{
+	/*background-color: blue;*/
 	margin: 22px 0px 15px 12px;
 }
 
