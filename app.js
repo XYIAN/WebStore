@@ -69,6 +69,7 @@ app.get("/", function(req,res) //root route
     var searchTerm = req.query.search; 
     var searchResult = req.query.searchResult; 
     var bookExists = null;
+    var genre = req.query.genre; 
     
     connection.query(stmt, function(error, found){
         if (error) throw error;
@@ -78,7 +79,8 @@ app.get("/", function(req,res) //root route
             req.searchResult = found; 
             
         }
-        res.render("index.ejs", {bookInfo:bookExists}, searchTerm, searchResult );
+        res.render("partials/head.ejs", {searchTerm: searchTerm}, {genre:genre});
+        res.render("index.ejs", {bookInfo:bookExists}, {searchTerm: searchTerm}, {searchResult:searchResult} );
     });
 });
 
