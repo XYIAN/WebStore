@@ -101,7 +101,7 @@ app.post('/login', function(req, res){
             
         }else {                        //user is not in db - do this as a pop up later
             console.log("Incorrect Login Info");
-            res.render('login.ejs', {loginError: true});
+            res.render('login.ejs', {signUpError: true});
         }
     });
 });
@@ -120,6 +120,11 @@ app.get("/signUp", function(req, res){ // sign up route
     res.render("signUp.ejs");
     var user = req.body.newUsername;
     var password = req.body.newPassword;
+    var confirm = req.body.confirmPassword;
+    if (password != confirm ){
+        {dontMatch: true}
+    }
+
 
     var stmt = 'select * from user_info where userName=\''
                 + req.body.user+'\' '+ 
@@ -140,9 +145,14 @@ app.get("/signUp", function(req, res){ // sign up route
                         req.body.new_password+'\''
                         + 'and userId=\'' + 
                         req.body.random+'\'';
-                        
-        res.redirect('/');        
-        }else {                        //user is not in db - do this as a pop up later
+            connection.query(sql_data, function(error, found) {
+            if(error)throw error;
+            else{
+                res.redirect('/');
+            }
+        });
+
+        }else { //user exists  - do this as a pop up later
           console.log("User Already Exists! Info");
           res.render('signUp.ejs', {loginError: true});
         }
@@ -157,7 +167,7 @@ app.get("/signUp", function(req, res){ // sign up route
         app.get("errorMsgnew").innerHtml = `<p id = "errorMsgnew">Passwords don't match! Try again.</p>`;
     }else{
         var user = mysql.Server();// Need to access DB to get List of all users.
-        if(user == NULL){
+        if(user == null){
             //add user info to DB
         }
     }
