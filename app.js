@@ -58,8 +58,8 @@ app.get("/book/:id", function(req, res) { // displays product details
     });
 });
 
-app.get("/genre/:genre", function(req, res) { // displays books based on genre
-    var stmt = "select * from book_info where genre='" + req.params.genre + "';";
+app.get("/:num/:gen", function(req, res) { // displays books based on genre
+    var stmt = "select * from book_info where genre='" + req.params.gen + "';";
 
     var bookExists = null;
     
