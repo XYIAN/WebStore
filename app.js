@@ -83,7 +83,9 @@ app.get("/about", function(req, res){ // about route
 });
 
 
-
+app.get("/login", function(req, res){ // login route
+    res.render("login.ejs", {loginError: false});
+});
 
 app.post('/login', function(req, res){
     var stmt = 'select * from user_info where userName=\'' 
@@ -171,10 +173,7 @@ app.post("/signup", function(req, res){ // sign up route
     }*/
     
 
-app.get("/main", function(req, res){ // main route
-    res.render("mainPage.ejs");
 
-});
 
 app.get("/search", function(req,res) //search route
 {
@@ -190,18 +189,7 @@ app.get("/search", function(req,res) //search route
 
 });
 
-app.get("/search", function(req,res) //search route
-{
-    var stmt = "select cover, title, author, year, price from book_info;";
-    
-    var bookExists = null;
-    
-    connection.query(stmt, function(error, found){
-        if (error) throw error;
-        if (found.length){ bookExists = found; }
-        res.render("search.ejs", {bookInfo:bookExists});
-    });
-});
+
 
 app.get('/checkout',login_check,function(req, res){
     var stmt = 'select title, quantity, price from order_info left join book_info '+
