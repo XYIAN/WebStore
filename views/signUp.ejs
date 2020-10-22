@@ -1,52 +1,34 @@
 <% include partials/head.ejs %>
-        <h1 class="centerText"> This will be the Sign Up! </h1>
         
-        <p class="centerText">cite is currently<strong>under construction</strong> </p>
-        
-        <h3 class="centerText">Info:</h3>
-        <p></p>
-        
-
-                <div class = "LoginClass">
+        <div class = "LoginClass">
                 
-                <link href="css/styles.css" rel="stylesheet" type="text/css" />
-                
-                <h2>Welcome to the Login Page</h2>
-                
-                <img  src="img/newuserbook.jpg" width="300" alt="Trinity Select library"/>
-                
-                <p>Please enter a username</p>
-                <p>User name must contain numbers and characters only.</p>
-                <input id = "newUsername" type = "text"> 
+            <h2>Welcome to the Sign Up Page</h2>
+            
+            <img class="centerIMG" src="/img/books.jpg" width="300" alt="Trinity Select library"/>
+            
+            <h2>Username must be greater than 5 characters<br>
+                Password must be at least 8 characters long
+            </h2>
+            <br>    
+            <form action='/signup' method='POST'>
+                <label for = "newUsername">Username: <br></label>
+                <input type = "text" id = "newUsername" name = "newUsername" placeholder='New Username' pattern = ".{5,}" required> 
                 <br>
-                <p>Password Must be 8 characters long.</p>
-                <input id = "newPassword" type = "password">
-                 <br>
-                 <p>Confirm Password.</p>
-                 <input id = "confirmPassword" type = "password">
-                
-                 <br><br>
-                
-                <button id = "newUserButton">Confirm New User </button>
-                <br><br>
-                
+                <label for = "newPassword">Password: </label>
+                <input type = "password" id = "newPassword" name = "newPassword" placeholder = "New Password" pattern = ".{8,}" required>
+                <br>
+                <label for = "confirmPassword">Re Enter Password: </label> 
+                <input type = "password" id = "confirmPassword" name = "confirmPassword" placeholder = "Re Enter Password" pattern = ".{8,}" required>
+                <br>
+                <button>Sign Up!</button>
+                <br>
                 <%if(signUpError){%>
-                        <h1 class="centerText" style="color:red;">Username Taken!</h1>
-                        <%}%>
-
-                <%if(dontMatch){%>
-                    <strong>User name Taken!</strong>
-                    <br>
+                    <h1 class="centerText" style="color:red;">Username Taken!</h1>
                     <%}%>
-
-
-                </div>
-
-        
-        <img class="centerIMG" src="/img/books.jpg" width="300" alt="Trinity Select library"/>
-        
-    
-        
-        <h4 id="bottomInfo"> This will be the Sign Up! </h4>
+                <%if(dontMatch){%>
+                    <h1 class="centerText" style="color:red;">Passwords Do Not Match! Re Enter Info</h1>
+                    <%}%>
+            </form>
+        </div>
         
 <% include partials/footer.ejs %> 

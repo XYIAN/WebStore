@@ -116,50 +116,48 @@ app.get('/logout', function(req, res){
 });
 
 
-app.get("/signUp", function(req, res){ // sign up route
-    res.render("signUp.ejs");
+app.get("/signup", function(req, res){ // login route
+    res.render("signUp.ejs", {signUpError: false, dontMatch : false});
+});
+app.post("/signup", function(req, res){ // sign up route
     var user = req.body.newUsername;
     var password = req.body.newPassword;
-    var confirm = req.body.confirmPassword;
-    if (password != confirm ){
-        {dontMatch: true}
-    }
-
-
-    var stmt = 'select * from user_info where userName=\''
-                + req.body.user+'\' '+ 
-                'and passport=\'' + 
-                req.body.password+'\'';
-    var new_user = null;
-    var new_password = null;
-    connection.query(stmt, function(error, results){
-    if(results == null){      //user is in db
-        new_user = user;
-        new_password = password;
-        req.session.signUp = user;
-        var random = Math.floor(Math.random() * 100);
-        
-        var sql_data = 'insert * into user_info where userName\''
-                        + req.body.new_user +'\' '
-                        + 'and password=\'' + 
-                        req.body.new_password+'\''
-                        + 'and userId=\'' + 
-                        req.body.random+'\'';
-            connection.query(sql_data, function(error, found) {
-            if(error)throw error;
-            else{
+    var confirmPass = req.body.confirmPassword;
+    
+    if (password == confirmPass) {
+        var stmt = 'select * from user_info where userName=\''
+                +user+'\' '+ 
+                'and password=\'' + 
+                password+'\'';
+        connection.query(stmt, function(error, results){
+        if (error) throw error;
+        if(!results.length){      //user is not in db
+            var random = Math.floor(Math.random() * 100);
+            var sql_data = 'insert into user_info values ('
+                            +'\''+random+'\', '
+                            +'\''+user+'\', '
+                            +'\''+password+'\')';
+            connection.query(sql_data, function(error, result) {
+                req.session.login = user;
+                if(error) {
+                    req.session.destroy();
+                    throw error;
+                }    
                 res.redirect('/');
-            }
-        });
-
-        }else { //user exists  - do this as a pop up later
-          console.log("User Already Exists! Info");
-          res.render('signUp.ejs', {loginError: true});
+            });                
+        }else {     
+            console.log("User Already Exists!");
+            res.render('signUp.ejs', {signUpError: true, dontMatch : false});
         }
-    });
+        });        
+    }
+    else {
+        res.render('signUp.ejs', {signUpError : false, dontMatch : true});
+    }
+});
     
 
-    var username = app.get("#newUsername");
+  /*  var username = app.get("#newUsername");
     var password = app.get("#newPassword");
     var confirmpass = app.get("#confirmPassowrd");
     
@@ -170,10 +168,8 @@ app.get("/signUp", function(req, res){ // sign up route
         if(user == null){
             //add user info to DB
         }
-    }
+    }*/
     
-});
-
 
 app.get("/main", function(req, res){ // main route
     res.render("mainPage.ejs");
