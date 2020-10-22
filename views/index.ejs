@@ -36,7 +36,8 @@
                         <div class="card-body">
                             <h5 class="card-title"><%= b.title %></h5>
                             <!--extra: click on author to get books written by them-->
-                            by <a href="#" class="card-link"><%= b.author %></a>
+                            <!--by <a href="#" class="card-link">b.author</a>-->
+                            <p>by <%= b.author %></p>
                             <p class="card-text"><b>$<%= b.price %></b></p>
                             <!--view should guide to detail Page-->
                             <a href="/book/<%= b.bookId %>" class="btn btn-dark btn-lg">View</a>
