@@ -1,15 +1,15 @@
 <% include partials/head.ejs %>
-        <form id="searchBar">
-                <input id="search" name="search" value="<%searchTerm%>" type="text" placeholder="Search by Title, Author, or ISBN...">
-                <select name="genre" onchange="this.form.submit()"> 
-                    <option value="">Select Genre</option>
-                    <option value="novel"     <% if (genre == "novel"){ %> selected } <% } %> >novel</option>
-                    <option value="fantasy"   <% if (genre == "fantasy"){ %> selected } <% } %> >fantasy</option>
-                    <option value="kids"      <% if (genre == "kids"){ %> selected } <% } %> >kids</option>
-                    <option value="mystery"   <% if (genre == "mystery"){ %> selected } <% } %> >mystery</option>
-                    <option value="dystopian" <% if (genre == "dystopian"){ %> selected } <% } %> >dystopian</option>
-                </select>
-        </form>
+        <!--<form id="searchBar">-->
+        <!--        <input id="search" name="search" value="<%searchTerm%>" type="text" placeholder="Search by Title, Author, or ISBN...">-->
+        <!--        <select name="genre" onchange="this.form.submit()"> -->
+        <!--            <option value="">Select Genre</option>-->
+        <!--            <option value="novel"     <% if (genre == "novel"){ %> selected } <% } %> >novel</option>-->
+        <!--            <option value="fantasy"   <% if (genre == "fantasy"){ %> selected } <% } %> >fantasy</option>-->
+        <!--            <option value="kids"      <% if (genre == "kids"){ %> selected } <% } %> >kids</option>-->
+        <!--            <option value="mystery"   <% if (genre == "mystery"){ %> selected } <% } %> >mystery</option>-->
+        <!--            <option value="dystopian" <% if (genre == "dystopian"){ %> selected } <% } %> >dystopian</option>-->
+        <!--        </select>-->
+        <!--</form>-->
         <div id="hamburger"> 
             <!--checkbox helps the span be clickable like a button-->
             <input type="checkbox">
