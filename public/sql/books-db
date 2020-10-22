@@ -30,7 +30,7 @@ CREATE TABLE `book_info` (
   `year` int(4) DEFAULT NULL,
   `inStock` int(3) DEFAULT NULL,
   `price` float(5,2) DEFAULT NULL,
-  `genre` varchar(10) COLLATE utf8_unicode_ci NOT NULL
+  `genre` varchar(12) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 INSERT INTO `book_info` (`bookId`, `title`, `author`, `cover`, `year`, `inStock`, `price`, `genre`) VALUES
