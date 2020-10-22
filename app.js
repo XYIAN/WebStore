@@ -25,8 +25,8 @@ if (process.env.JAWSDB_URL) {
 	/* Configure LOCAL MySQL DBMS */
 	var connection = mysql.createConnection({
     		host: 'localhost',
-    		user: 'yvcruz',
-    		password: 'yvcruz',
+    		user: 'kyle',
+    		password: 'kyle',
     		database: 'books_db'
 	});
 	connection.connect();
@@ -66,13 +66,19 @@ app.get("/", function(req,res) //root route
 {
     //search(req,res);
     var stmt = "select bookId, cover, title, author, year, price from book_info;";
-    
+    var searchTerm = req.query.search; 
+    var searchResult = req.query.searchResult; 
     var bookExists = null;
     
     connection.query(stmt, function(error, found){
         if (error) throw error;
-        if (found.length){ bookExists = found; }
-        res.render("index.ejs", {bookInfo:bookExists});
+        if (found.length){ 
+            bookExists = found,
+            req.searchTerm = searchTerm,
+            req.searchResult = found; 
+            
+        }
+        res.render("index.ejs", {bookInfo:bookExists}, searchTerm, searchResult );
     });
 });
 
@@ -83,7 +89,8 @@ app.get("/book/:id", function(req, res) { // displays product details
     
     connection.query(stmt, function(error, found){
         if (error) throw error;
-        if (found.length){ bookExists = found; }
+        if (found.length){
+            bookExists = found; }
         res.render("productDetail.ejs", {bookInfo:bookExists})
     });
 });
