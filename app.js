@@ -77,7 +77,7 @@ app.get("/", function(req,res) //root route
             bookExists = found,
             req.searchTerm = searchTerm,
             req.searchResult = found; 
-            
+            req.query.genre = found.genre;
         }
         res.render("partials/head.ejs", {searchTerm: searchTerm}, {genre:genre});
         res.render("index.ejs", {bookInfo:bookExists}, {searchTerm: searchTerm}, {searchResult:searchResult} );
