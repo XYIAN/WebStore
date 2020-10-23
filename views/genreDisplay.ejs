@@ -10,39 +10,41 @@
             
             <ul id="menu">
                 <a href="/"><li>All Genres</li></a>
-                <a href="genre/novel"><li>Novel</li></a>
-                <a href="genre/fantasy"><li>Fantasy</li></a>
-                <a href="genre/kids"><li>Kids</li></a>
-                <a href="genre/mystery"><li>Mystery</li></a>
-                <a href="genre/dystopian"><li>Dystopian</li></a>
-                <!--<a href="genre/mythological"><li>Mythological</li></a>-->
-                <a href="genre/teen"><li>Teen</li></a>
+                <a href="/1/novel"><li>Novel</li></a>
+                <a href="/2/fantasy"><li>Fantasy</li></a>
+                <a href="/3/kids"><li>Kids</li></a>
+                <a href="/4/mystery"><li>Mystery</li></a>
+                <a href="/5/dystopian"><li>Dystopian</li></a>
+                <a href="/6/mythological"><li>Mythological</li></a>
+                <a href="/7/teen"><li>Teen</li></a>
             </ul>
-            <h1 class="centerText"> Welcome to our book store!</h1>
         </div>
         
-        
-        <img class="centerIMG" src="/img/books.jpg" width="300" alt="Trinity Select library"/>
-        
         <form action='/' method='GET'>
-            <!--this is to display product-->
-            <div class="grid-container">
-                <% bookInfo.forEach(function(b) { %>
-                
-                    <!--cards displayed with bootstrap-->
-                    <div class="card" style="width: 18rem;">
-                        <!--should be able tob click on image or title to get details-->
-                        <img class="card-img-top" src="<%= b.cover %>" alt="Card image cap"/>
-                        <div class="card-body">
-                            <h5 class="card-title"><%= b.title %></h5>
-                            <!--extra: click on author to get books written by them-->
-                            by <a href="#" class="card-link"><%= b.author %></a>
-                            <p class="card-text"><b>$<%= b.price %></b></p>
-                            <!--view should guide to detail Page-->
-                            <a href="/book/<%= b.bookId %>" class="btn btn-dark btn-lg">View</a>
+            <% if(bookInfo == null) { %>
+                <h1 class="centerText">No available books at the moment!</h1>
+            <% } else { %>
+                <!--this is to display product-->
+                <h1 class="centerText">Genre: <%= bookInfo[0].genre %></h1>
+                <div class="grid-container">
+                    <% bookInfo.forEach(function(b) { %>
+                        <!--cards displayed with bootstrap-->
+                        <div class="card" style="width: 18rem;">
+                            <!--should be able tob click on image or title to get details-->
+                            <img class="card-img-top" src="<%= b.cover %>" alt="Card image cap"/>
+                            <div class="card-body">
+                                <h5 class="card-title"><%= b.title %></h5>
+                                <!--extra: click on author to get books written by them-->
+                                <!--by <a href="#" class="card-link">b.author</a>-->
+                                <p>by <%= b.author %></p>
+                                <p class="card-text"><b>$<%= b.price %></b></p>
+                                <!--view should guide to detail Page-->
+                                <a href="/book/<%= b.bookId %>" class="btn btn-dark btn-lg">View</a>
+                            </div>
                         </div>
-                    </div>
-                <% }) %>
-            </div>
+                    <% }) %>
+                </div>
+            <% } %>
+            
         </form>
 <% include partials/footer.ejs %> 

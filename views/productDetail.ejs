@@ -1,22 +1,48 @@
 <% include partials/head.ejs %>
+        <div id="hamburger"> 
+            <!--checkbox helps the span be clickable like a button-->
+            <input type="checkbox" />
+            
+            <!--three spans act as the 3 lines-->
+            <span class="span1"></span>
+            <span class="span2"></span>
+            <span class="span3"></span>
+            
+            <ul id="menu">
+                <a href="/"><li>All Genres</li></a>
+                <a href="/1/novel"><li>Novel</li></a>
+                <a href="/2/fantasy"><li>Fantasy</li></a>
+                <a href="/3/kids"><li>Kids</li></a>
+                <a href="/4/mystery"><li>Mystery</li></a>
+                <a href="/5/dystopian"><li>Dystopian</li></a>
+                <a href="/6/mythological"><li>Mythological</li></a>
+                <a href="/7/teen"><li>Teen</li></a>
+            </ul>
+            <h1 class="centerText"> Welcome to our book store!</h1>
+        </div>
         
-        <form action='/genre/<%=bookInfo.bookId%>' method='GET'>
+        <form action='/book/<%=bookInfo.bookId%>' method='GET'>
             <div class="productDetail-container">
-                <div class="productDetailCard" style="width: 18rem;">
-                    
+                
+                <!--<div class="productDetailCard">-->
+                    <!--this is for the image-->
                     <div class="productImage">
                         <img class="productCardImg" src="<%= bookInfo[0].cover %>" alt="Card image cap">
                     </div>
+                    <!--this is for the product information-->
                     <div class="productContent">
-                        <h5 class="productInfo"><%= bookInfo[0].title %></h5>
-                        <h5 class="productInfo"><%= bookInfo[0].author %></h5>
-                        <h5 class="productInfo"><%= bookInfo[0].year %></h5>
-                        <h5 class="productInfo"><%= bookInfo[0].inStock %></h5>
-                        <h5 class="productInfo"><%= bookInfo[0].price %></h5>
-                        <h5 class="productInfo"><%= bookInfo[0].genre %></h5>
+                        <h5 class="title"><%= bookInfo[0].title %></h5>
+                        <h5 class="author">by <%= bookInfo[0].author %>, <%= bookInfo[0].year %></h5>
+                        <hr>
+                        <!--<h5 class="productInfo"></h5>-->
+                        <h5 class="stock">Only <%= bookInfo[0].inStock %> left!</h5>
+                        <h5 class="price"><b>$<%= bookInfo[0].price %></b></h5>
+                        <h5 class="genre">Genre: <%= bookInfo[0].genre %></h5>
+                        
+                        <button class="cartButt">Add To Cart</button>
                     </div>
-                    
-                </div>
+                <!--</div>-->
+                
             </div>
         </form>
         
