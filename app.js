@@ -93,9 +93,6 @@ app.post('/login', function(req, res){
             user = results[0].userName;
             req.session.login = user;
             res.redirect('/');
-            
-            res.render('login.ejs', {loggedIn: true});//show cart  raul
-            
         }else {                        //user is not in db - do this as a pop up later
             console.log("Incorrect Login Info");
             res.render('login.ejs', {signUpError: true});
