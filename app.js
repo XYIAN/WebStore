@@ -6,6 +6,10 @@ var session = require('express-session');
 var passport = require('passport');
 var bodyParser = require('body-parser');
 
+
+var cart_qty =0;
+var total = 0;
+
 app.engine('html', require('ejs').renderFile);//render other files
 app.use(express.static("public"));//access img css js or any external file
 app.use(express.static('css'));
@@ -88,10 +92,13 @@ app.post('/login', function(req, res){
         if(results.length){      //user is in db
             user = results[0].userName;
             req.session.login = user;
-            res.redirect('/');        
+            res.redirect('/');
+            
+            res.render('login.ejs', {loggedIn: true});//show cart  raul
+            
         }else {                        //user is not in db - do this as a pop up later
             console.log("Incorrect Login Info");
-            res.render('login.ejs', {loginError: true});
+            res.render('login.ejs', {signUpError: true});
         }
     });
 });
@@ -105,39 +112,63 @@ app.get('/logout', function(req, res){
     }else res.render("logout.ejs",{logoutUser: "ERROR NO LOG IN"})    
 });
 
-app.get("/signUp", function(req, res){ // sign up route
-    res.render("signUp.ejs");
+
+app.get("/signup", function(req, res){ // login route
+    res.render("signUp.ejs", {signUpError: false, dontMatch : false});
+});
+app.post("/signup", function(req, res){ // sign up route
     var user = req.body.newUsername;
     var password = req.body.newPassword;
-
-    var stmt = 'select * from user_info where userName=\''
-                + req.body.user+'\' '+ 
-                'and passport=\'' + 
-                req.body.password+'\'';
-    var new_user = null;
-    var new_password = null;
-    connection.query(stmt, function(error, results){
-    if(results == null){      //user is in db
-        new_user = user;
-        new_password = password;
-        req.session.signUp = user;
-        var random = Math.floor(Math.random() * 100);
-        
-        var sql_data = 'insert * into user_info where userName\''
-                        + req.body.new_user +'\' '
-                        + 'and password=\'' + 
-                        req.body.new_password+'\''
-                        + 'and userId=\'' + 
-                        req.body.random+'\'';
-                        
-        res.redirect('/');        
-        }else {                        //user is not in db - do this as a pop up later
-          console.log("User Already Exists! Info");
-          res.render('signUp.ejs', {loginError: true});
-        }
-    });
+    var confirmPass = req.body.confirmPassword;
     
+    if (password == confirmPass) {
+        var stmt = 'select * from user_info where userName=\''
+                +user+'\' '+ 
+                'and password=\'' + 
+                password+'\'';
+        connection.query(stmt, function(error, results){
+        if (error) throw error;
+        if(!results.length){      //user is not in db
+            var random = Math.floor(Math.random() * 100);
+            var sql_data = 'insert into user_info values ('
+                            +'\''+random+'\', '
+                            +'\''+user+'\', '
+                            +'\''+password+'\')';
+            connection.query(sql_data, function(error, result) {
+                req.session.login = user;
+                if(error) {
+                    req.session.destroy();
+                    throw error;
+                }    
+                res.redirect('/');
+            });                
+        }else {     
+            console.log("User Already Exists!");
+            res.render('signUp.ejs', {signUpError: true, dontMatch : false});
+        }
+        });        
+    }
+    else {
+        res.render('signUp.ejs', {signUpError : false, dontMatch : true});
+    }
 });
+    
+
+  /*  var username = app.get("#newUsername");
+    var password = app.get("#newPassword");
+    var confirmpass = app.get("#confirmPassowrd");
+    
+    if(password != confirmpass){
+        app.get("errorMsgnew").innerHtml = `<p id = "errorMsgnew">Passwords don't match! Try again.</p>`;
+    }else{
+        var user = mysql.Server();// Need to access DB to get List of all users.
+        if(user == null){
+            //add user info to DB
+        }
+    }*/
+    
+
+
 
 app.get("/search", function(req,res) //search route
 {
@@ -150,7 +181,10 @@ app.get("/search", function(req,res) //search route
         if (found.length){ bookExists = found; }
         res.render("search.ejs", {bookInfo:bookExists});
     });
+
 });
+
+
 
 app.get('/checkout',login_check,function(req, res){
     var stmt = 'select title, quantity, price from order_info left join book_info '+
