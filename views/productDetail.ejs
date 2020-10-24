@@ -39,11 +39,15 @@
                         <h5 class="price"><b>$<%= bookInfo[0].price %></b></h5>
                         <h5 class="genre">Genre: <%= bookInfo[0].genre %></h5>
                         
-                        <button class="cartButt">Add To Cart</button>
+                        <!--<button class="cartButt">Add To Cart</button>-->
                     </div>
                 <!--</div>-->
                 
             </div>
+        </form>
+        <form action='/addcart/<%=bookInfo[0].bookId%>' method='POST'>
+            <input type="text" id="bookitem" name="bookitem" value="<%=bookInfo[0].bookId%>">
+            <center><input class="cartButt" type="submit" value="Add To Cart"></center>
         </form>
         
 <% include partials/footer.ejs %> 

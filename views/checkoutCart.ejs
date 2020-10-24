@@ -1,21 +1,24 @@
 <% include partials/head.ejs %>
         
         <h1 class ="centerText">Checkout Cart Items</h1> <br>
-        <%if(results){%>
+        <%if(result){%>
                 <table class ="centerText" style="width:100%">
                         <tr>
+                                <th>Cover</th>
                                 <th>Title</th>
                                 <th>Quantity</th>
                                 <th>Price per Book</th> 
                         </tr>        
-                </table>
-                <%inCart.forEach(function(book){%>
+                
+                <%books.forEach(function(book){%>
                         <tr>
+                                <td><img src="<%=book.cover%>"/></td>
                                 <td><%=book.title%></td>
                                 <td><%=book.quantity%></td>
                                 <td><%=book.price%></td>
                         </tr>
                 <%});%>
+                </table>
         <%}
         else {%>
         <h1 class ="centerText">No Items in Cart!</h1> <br>

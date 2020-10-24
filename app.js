@@ -29,8 +29,8 @@ if (process.env.JAWSDB_URL) {
 	/* Configure LOCAL MySQL DBMS */
 	var connection = mysql.createConnection({
     		host: 'localhost',
-    		user: 'jennifer',
-    		password: 'jenniferL',
+    		user: 'yvcruz',
+    		password: 'yvcruz',
     		database: 'books_db'
 	});
 	connection.connect();
@@ -76,6 +76,52 @@ app.get("/:num/:gen", function(req, res) { // displays books based on genre
 
 app.get("/contact", function(req, res){ // contact route
     res.render("contact.ejs");
+});
+
+app.post("/addcart/:bkid", login_check,function(req, res){
+    var name = req.session.login
+    var st = 'select userId from user_info where userName=\''
+            +name+'\'';
+    var uid;        
+    connection.query(st, function(error, found) {
+        console.log(found);
+        if (error) throw error;
+        uid = found[0].userId;
+        console.log(uid+"<--uid");
+    });        
+    
+    var stmt = 'select * from order_info where userId=\''
+                +uid+'\' and bookId=\''
+                +req.body.bookitem+'\'';
+    console.log(stmt)            
+    connection.query(stmt, function(error, found) {
+        if (error) throw error;
+        if (found.length) {
+            var quant_update = found[0].quantity+1;
+            var update_entry = 'update order_info set quantity='
+                                +quant_update+' where userId=\''
+                                +uid+'\' and bookId=\''
+                                +req.body.bookitem+'\'';
+            console.log(update_entry);
+            connection.query(update_entry, function(error, found) {
+                if (error) { throw error}
+                else res.render('successAdd.ejs', {success: true});
+                
+            });
+        }else {
+            var new_entry = 'insert into order_info (userId, bookId, quantity) values ('
+                            +uid+', \''
+                            +req.body.bookitem+'\', \''
+                            +1+'\')';
+            console.log(new_entry);
+            connection.query(new_entry, function(error, result) {
+                if (error) { throw error }
+                //else res.render('successAdd.ejs', {success: true});
+            });
+            
+        }
+    });
+    
 });
 
 app.get("/login", function(req, res){ // login route
@@ -190,17 +236,30 @@ app.get("/search", function(req,res) //search route
 
 
 app.get('/checkout',login_check,function(req, res){
-    var stmt = 'select title, quantity, price from order_info left join book_info '+
+    var name = req.session.login
+    var st = 'select userId from user_info where userName=\''
+            +name+'\'';
+    var uid;        
+    connection.query(st, function(error, found) {
+        console.log(found);
+        if (error) throw error;
+        uid = found[0].userId;
+        console.log(uid+"<--uid");
+    });  
+    
+    var stmt = 'select cover, title, quantity, price from order_info left join book_info '+
                'on order_info.bookId=book_info.bookId ' + 
-               'where userId=\'' + req.session.login + '\'';
+               'where userId=\'' + 1 + '\'';
+               console.log(stmt);
     connection.query(stmt, function(error, results){
         if(error){
             throw error;
         } else if(results.length){ 
-            res.render('checkoutCart.ejs', {results: true, books: results});     
+            console.log(results);
+            res.render('checkoutCart.ejs', {result: true, books: results});     
         } else {                        
             console.log("No books in cart");
-            res.render('checkoutCart.ejs', {results: false});
+            res.render('checkoutCart.ejs', {result: false});
         }
     });
 });
