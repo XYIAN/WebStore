@@ -29,8 +29,8 @@ if (process.env.JAWSDB_URL) {
 	/* Configure LOCAL MySQL DBMS */
 	var connection = mysql.createConnection({
     		host: 'localhost',
-    		user: 'raul',
-    		password: 'raul676',
+    		user: 'jennifer',
+    		password: 'jenniferL',
     		database: 'books_db'
 	});
 	connection.connect();
@@ -62,8 +62,8 @@ app.get("/book/:id", function(req, res) { // displays product details
     });
 });
 
-app.get("/genre/:genre", function(req, res) { // displays books based on genre
-    var stmt = "select * from book_info where genre='" + req.params.genre + "';";
+app.get("/:num/:gen", function(req, res) { // displays books based on genre
+    var stmt = "select * from book_info where genre='" + req.params.gen + "';";
 
     var bookExists = null;
     
@@ -77,11 +77,6 @@ app.get("/genre/:genre", function(req, res) { // displays books based on genre
 app.get("/contact", function(req, res){ // contact route
     res.render("contact.ejs");
 });
-
-app.get("/about", function(req, res){ // about route
-    res.render("about.ejs");
-});
-
 
 app.get("/login", function(req, res){ // login route
     res.render("login.ejs", {loginError: false});

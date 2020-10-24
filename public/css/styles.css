@@ -22,24 +22,25 @@ header, main, .nav, footer
 {
     font-size: 1.5em; 
     color: white; 
-	padding: 14px 16px;
+	padding: 14px 14px;
 	text-align: center;
 	text-decoration: none;
+	transition: 0.2s;
 }
 .leftA:hover
 {
-    font-size: 1.8em;
+    font-size: 1.7em;
     color: white;
     text-shadow: 2px 2px 8px cyan;
     text-decoration: none;
-    transition: 2s;
+    transition: 1.3s;
 }
 
 /*CSS for search bar*/
 .nav input[type=text]{
 	float: right;
 	padding: 6px;
-	margin: 15px 0px 15px 40px;
+	margin: 15px 0px 15px 9px;
 	border: none;
 	font-size: 20px;
 	width: 500px;
@@ -48,13 +49,18 @@ header, main, .nav, footer
 /*CSS for buttons*/
 button{
 	display: inline-block;
-	border:0.1em solid white;
-	width: 80px;
-	border-radius: 0.12em;
 	box-sizing: border-box;
+	width: 82px;
+	
 	text-decoration:none;
-	color:black;
 	text-align:center;
+	
+	border:0.1em solid white;
+	border-radius: 0.12em;
+	
+	color: black;
+	background-color: white;
+	
 	transition: all 0.2s;
 }
 button:hover{
@@ -66,10 +72,12 @@ button:hover{
 }
 /*enter*/
 .nav button{
+	/*background-color: green;*/
 	margin: 15px 0px 15px 0px;
 }
 /*right of enter*/
 .nav a button{
+	/*background-color: blue;*/
 	margin: 22px 0px 15px 12px;
 }
 
@@ -94,13 +102,62 @@ button:hover{
 /*CSS for the productDetail.ejs file*/
 .productDetail-container {
 	display: flex;
-	position: relative;
-	justify-content: space-between;
-	align-items: center;
 	flex-wrap: wrap;
+	border: 3px solid black;
+	border-radius: 8px;
+	background-color: rgb(0, 0, 0, 5%);
+	margin: 70px;
+	padding: 50px;
 }
-.productDetailCard {
-	display: flex;
+.productImage{
+	width: 55%;
+	text-align: center;
+}
+.productCardImg {
+	width: 250px;
+	height: auto;
+	overflow: hidden;
+	box-shadow: 0px 0px 8px black;
+}
+.title {
+	font-size: x-large;
+	font-weight: bolder;
+	font-family: 'Nanum Gothic', sans-serif;
+}
+.author {
+	font-size: medium;
+	font-family: 'Nanum Gothic', sans-serif;
+}
+.stock, .price, .genre{
+	font-family: 'Rubik', sans-serif;
+}
+hr {
+	border-top: 1px solid black;
+	border-radius: 5px;
+}
+.cartButt{
+	font-size: larger;
+	width: 200px;
+	padding: 10px;
+	
+	text-decoration:none;
+	text-align:center;
+	
+	border:0.1em solid white;
+	border-radius: 0.12em;
+	
+	color: white;
+	background-color: black;
+	
+	transition: all 0.2s;
+}
+.cartButt:hover{
+	/*#80FFFF -- light cyan*/
+	color: white;
+	text-shadow: 2px 2px 8px black;
+	background-color: rgb(0, 0, 0, 50%);
+	border: none;
+	/*border-radius: 0.12em;*/
 }
 
 /*CSS for the hamburger design in index.ejs & genreDisplay.ejs*/
@@ -117,21 +174,19 @@ button:hover{
 	margin: 20px;
 	z-index: 1;
 }
-
 /* text on menu */
 #hamburger a
 {
-  text-decoration: none;
-  color: black;
-  transition: color 0.8s ease;
+	color: white;
+	text-decoration: none;
 }
-
 /* text color after hovering */
 #hamburger a:hover
 {
-	color: teal;
+	/*#F0FFFF is azure*/
+	color: #F0FFFF;
 	background-color: black;
-	text-shadow: 2px 2px 8px cyan;
+	text-shadow: 2px 2px 8px white;
 }
 
 /* 
@@ -181,38 +236,18 @@ button:hover{
 				background 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
 				opacity 0.55s ease;
 }
-
-/*
- * Transforms hamburger logo 
- * into  a crossmark
- */
+/*changed X to white hamburger logo as opacity wasn't working*/
 #hamburger span:first-child
 {
   transform-origin: 0% 0%;
 }
-#hamburger span:nth-last-child(2)
-{
-  transform-origin: 0% 100%;
-}
-/*makes crossmark visible*/
-#hamburger input:checked ~ span 
+#hamburger input:checked ~ span
 {
 	opacity: 1;
-	transform: rotate(45deg) translate(0px, -1px);
-	background: black;
+	transform: rotate(0deg) translate(1px, -4px);
+	background: white;
 }
-/*should hide middle line, opacity doesn't work atm*/
-#hamburger input:checked ~ span:nth-last-child(2)
-{
-  opacity: 0;
-  transform: rotate(0deg) scale(0.2, 0.2);
-  /*color: red;*/
-}
-/*third line goes up*/
-#hamburger input:checked ~ span:nth-last-child(3)
-{
-  transform: rotate(-45deg) translate(0, -1px);
-}
+
 
 /*
  * Make this absolute positioned
@@ -224,7 +259,7 @@ button:hover{
 {
   position: absolute;
   list-style-type: none;
-  background: #ededed;
+  background: rgb(0, 0, 0, 65%);
   width: 300px;
   
   /*sets menu how it should look when it pops*/
@@ -237,18 +272,17 @@ button:hover{
   /*adds animation to when menu appears*/
   transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
 }
-
 #menu li
 {
   padding: 10px 0;
   font-size: 22px;
 }
-
 /*lets menu slide from the left*/
 #hamburger input:checked ~ ul
 {
   transform: none;
 }
+
 
 /* CSS for the footer*/
 
