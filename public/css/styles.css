@@ -412,12 +412,14 @@ input[name="controls"] {display: none;}
 	color: black;
 }
 .LoginClass{
-background-color:#edf2f9;
-    font-size: 2em;    
-    width:900px;
-    height:900px;
-    margin:0 auto;
-    border-radius:20px;
-    border-color: black;
-    text-align: center;
-    }
+	text-align: center;
+	overflow: hidden;
+	background-color: #edf2f9;
+	font-size: 2em;    
+	width: 900px;
+	height: 900px;
+	margin: 0 auto;
+	border-radius: 20px;
+	border-color: black;
+	text-align: center;
+}
