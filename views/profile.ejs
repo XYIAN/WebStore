@@ -1,0 +1,21 @@
+<% include partials/head.ejs %>
+
+<a class="leftA" href="/profile"> Profile </a>
+
+<h1 class = "centerText"> User Profile </h1>
+<br>
+
+  <%if(loggedIn){%>
+           <img class="centerIMG" src="/img/Unknown.jpeg" width="300" alt="Unknown Icon"/>
+	         <h1 class = "centerText">User Name: <%= userName %></h1><br>
+				<%}%>
+  <%if(loggedError){%>
+        <h1 class = "centerText"> No one is logged in! </h1>
+  <%}%>
+
+<p></p>
+
+<img class="centerIMG" src="/img/books.jpg" width="300" alt="Trinity Select library"/>
+
+
+<% include partials/footer.ejs %> 
