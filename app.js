@@ -153,6 +153,12 @@ app.post("/signup", function(req, res){ // sign up route
     }
 });
     
+app.get('/profile', function(req, res){
+  if(req.session.login != null){
+    var name = req.session.login;
+    res.render("profile.ejs", {loggedIn: true, userName: name, loggedError: false});
+  }else res.render("profile.ejs",{loggedError: true, loggedIn: false});
+});
 
   /*  var username = app.get("#newUsername");
     var password = app.get("#newPassword");
